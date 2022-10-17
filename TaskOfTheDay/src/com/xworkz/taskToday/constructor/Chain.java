@@ -36,7 +36,7 @@ public class Chain {
 	
 	public Chain(String type,int price,double length, String material,double weight)
 	{
-		this(type,price,length);
+		this(type,price,length,material);
 		this. weight=weight;
 	}
 	
@@ -54,7 +54,7 @@ public class Chain {
 	
 	public Chain(String type,int price,double length, String material,double weight, boolean stolen,String usedFor,boolean fresh)
 	{
-		this(type,price,length,material,weight,stolen);
+		this(type,price,length,material,weight,stolen,usedFor);
 		this.fresh=fresh;
 	}
 	
