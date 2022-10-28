@@ -9,7 +9,7 @@ public class FlowerRunner {
 		Flower flower=new Flower("red",545.5d);
 		flower.noOfTypes=68;
 		Flower.size="small";
-		flower.setPrice();
+		flower.setPrice(25);
 		flower.display();
 		
 

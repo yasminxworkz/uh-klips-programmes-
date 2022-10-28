@@ -20,8 +20,8 @@ public class Flower {
 		this.quantity = quantity;
 	}
 
-	public void setPrice() {
-		price = 25;
+	public void setPrice(int money) {
+		money = price;
 
 	}
 

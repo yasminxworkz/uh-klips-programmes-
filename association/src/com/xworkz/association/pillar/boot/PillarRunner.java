@@ -1,6 +1,6 @@
-package com.xworkz.association.boot;
+package com.xworkz.association.pillar.boot;
 
-import com.xworkz.association.constructor.Pillar;
+import com.xworkz.association.pillar.constructor.Pillar;
 
 public class PillarRunner {
 
