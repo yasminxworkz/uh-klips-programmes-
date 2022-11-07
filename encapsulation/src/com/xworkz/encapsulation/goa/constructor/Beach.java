@@ -10,6 +10,8 @@ public class Beach {
 	}
 	
 	public void use() {
+		System.out.println("============default access specifier==========");
+
 		System.out.println("goa state :"+this.goa.state);
 		System.out.println("goa noOfBeach :"+this.goa.noOfBeach);
 		System.out.println("goa ticketPrice :"+this.goa.ticketPrice);
@@ -23,14 +25,14 @@ public class Beach {
 		System.out.println(goa.getTemp());
 		goa.setCountry("India");
 		System.out.println(goa.getCountry());
-		goa.setchiefMinister("pramod");
-		System.out.println(goa.getchiefMinister());
-		goa.setnoOfTouristsPerDay(10000);
-		System.out.println(goa.getnoOfTouristsPerDay());
-		goa.setfamousDrink("feni");
-		System.out.println(goa.getfamousDrink());
-		goa.setpopulation(1800000l);
-		System.out.println(goa.getpopulation());
+		goa.setChiefMinister("pramod");
+		System.out.println(goa.getChiefMinister());
+		goa.setNoOfTouristsPerDay(10000);
+		System.out.println(goa.getNoOfTouristsPerDay());
+		goa.setFamousDrink("feni");
+		System.out.println(goa.getFamousDrink());
+		goa.setPopulation(1800000l);
+		System.out.println(goa.getPopulation());
 		
 		
 		

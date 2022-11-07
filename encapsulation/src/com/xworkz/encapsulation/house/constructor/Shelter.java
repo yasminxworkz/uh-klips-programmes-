@@ -12,7 +12,7 @@ public class Shelter {
 	}
 		
 		public void use() {
-		
+			System.out.println("============default access specifier==========");
 		System.out.println("size: "+this.ghar.size);
 		System.out.println("houseName: "+this.ghar.houseName);
 		System.out.println("area: "+this.ghar.area);
@@ -23,7 +23,8 @@ public class Shelter {
 		System.out.println("floor: "+ghar.floor);
 		System.out.println("wellFurnished: "+ghar.wellFurnished);
 		System.out.println("noOfMembers: "+ghar.noOfMembers);
-		
+		System.out.println("============private access specifier==========");
+
 		ghar.setHouseDesigner("farhat");
 		System.out.println("HouseDesigner: "+ghar.getHouseDesigner());
 		

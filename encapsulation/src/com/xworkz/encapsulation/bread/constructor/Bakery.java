@@ -12,6 +12,8 @@ public class Bakery {
 	}
 	
 	public void use() {
+		System.out.println("============default access specifier==========");
+
 		System.out.println("color :"+this.bread.color);
 		System.out.println("flavor :"+this.bread.flavor);
 		System.out.println("goodQuality :"+this.bread.goodQuality);
@@ -22,7 +24,8 @@ public class Bakery {
 		System.out.println("quantity: "+bread.quantity);
 		System.out.println("shape: "+bread.shape);
 		System.out.println("type: "+bread.type);
-		
+		System.out.println("============private access specifier==========");
+
 		bread.setBrand("BigBread");
 		System.out.println("Brand: "+bread.getBrand());
 		

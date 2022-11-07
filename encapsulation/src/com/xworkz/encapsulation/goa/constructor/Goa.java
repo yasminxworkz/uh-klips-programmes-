@@ -31,35 +31,35 @@ public class Goa {
 		this.country=country;
 		
 	}
-		public String getchiefMinister() {	
+		public String getChiefMinister() {	
 			return chiefMinister;
 			}
 			
-			void setchiefMinister(String chiefMinister) {
+			void setChiefMinister(String chiefMinister) {
 				this.chiefMinister=chiefMinister;
 			}
 			
-			public int getnoOfTouristsPerDay() {
+			public int getNoOfTouristsPerDay() {
 				return noOfTouristsPerDay;
 				}
 				
-				void setnoOfTouristsPerDay(int noOfTouristsPerDay) {
+				void setNoOfTouristsPerDay(int noOfTouristsPerDay) {
 					this.noOfTouristsPerDay=noOfTouristsPerDay;
 				}
 				
-				public String getfamousDrink() {
+				public String getFamousDrink() {
 					return famousDrink;
 					}
 					
-					void setfamousDrink(String famousDrink) {
+					void setFamousDrink(String famousDrink) {
 						this.famousDrink=famousDrink;
 					}
 					
-					public long getpopulation() {
+					public long getPopulation() {
 						return population;
 						}
 						
-						void setpopulation(long population) {
+						void setPopulation(long population) {
 							this.population=population;
 						}
 						

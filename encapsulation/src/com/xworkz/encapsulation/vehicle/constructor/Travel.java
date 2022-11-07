@@ -11,6 +11,7 @@ public class Travel {
 	}
 	
 	public void use() {
+		System.out.println("============default access specifier==========");
 		System.out.println("type: "+this.trip.type);
 		System.out.println("owner: "+this.trip.owner);
 		System.out.println("capacity: "+this.trip.capacity);
@@ -19,15 +20,15 @@ public class Travel {
 		System.out.println("fuelType: "+trip.fuelType);
 		System.out.println("engineDisplacement: "+trip.engineDisplacement);
 		System.out.println("maxPower: "+trip.maxPower);
-		
+		System.out.println("============private access specifier==========");
 		trip.setRent(18000);
-		System.out.println(": "+trip.getRent());
+		System.out.println("rent: "+trip.getRent());
 		
 		trip.setDeparturePlace("gadag");
-		System.out.println(": "+trip.getDeparturePlace());
+		System.out.println("departurePlace: "+trip.getDeparturePlace());
 		
 		trip.setDestination("dandeli");
-		System.out.println(": "+trip.getDestination());
+		System.out.println("destination: "+trip.getDestination());
 		
 	}
 

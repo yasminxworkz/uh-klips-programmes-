@@ -9,11 +9,11 @@ public class BeachRunner {
 		Goa goa=new Goa();
 		Beach beach=new Beach();
 		beach.setGoa();
-		goa.getchiefMinister();
+		goa.getChiefMinister();
 		goa.getCountry();
-		goa.getfamousDrink();
-		goa.getnoOfTouristsPerDay();
-		goa.getpopulation();
+		goa.getFamousDrink();
+		goa.getNoOfTouristsPerDay();
+		goa.getPopulation();
 		goa.getTemp();
 		beach.use();
 
