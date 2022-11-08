@@ -4,6 +4,6 @@ public class Court {
 	public int types=4;
 	public String function="justice";
 	
-	Court law=new Court();
+	
 
 }

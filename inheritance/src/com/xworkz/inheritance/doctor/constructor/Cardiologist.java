@@ -5,5 +5,8 @@ public class Cardiologist extends Doctor {
 	public String device="stethoscope";
 	
 	
+	
+	
+	
 
 }

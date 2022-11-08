@@ -5,7 +5,6 @@ public class ENT extends Doctor  {
 	public int workingHrs=12;
 	
 	
-	
 		
 		
 		
