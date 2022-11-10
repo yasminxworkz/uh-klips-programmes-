@@ -7,7 +7,10 @@ public class CriminalRunner {
               public static void main(String[] args) {
             	  
             	  Criminal jail=new Ravi("murder",7, 28);
+            	  System.out.println(System.lineSeparator());
             	  jail.display();
-	
+
+            	  
+            	 
 }
 }

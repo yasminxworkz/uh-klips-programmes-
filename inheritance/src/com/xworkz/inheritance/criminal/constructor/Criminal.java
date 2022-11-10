@@ -8,6 +8,9 @@ public class Criminal {
 		super();
 		this.crime = crime;
 		this.imprisonment = imprisonment;
+		System.out.println(System.lineSeparator());
+		System.out.println(crime);
+		System.out.println(imprisonment);
 	}
 	
 	public void display() {
