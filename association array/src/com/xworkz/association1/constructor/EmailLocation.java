@@ -2,20 +2,40 @@ package com.xworkz.association1.constructor;
 
 public class EmailLocation {
 	
+		public int no;
+		public String street;
+		public EmailCity city ;
+		public EmailState state;
+		public EmailCountry country;
+
+		public void setStreet(int no, String street)
+		{ this.no=no;
+		  this.street=street;
+		}
 		
-		EmailCity city = new EmailCity();
-		EmailState state = new EmailState();
-		EmailCountry country = new EmailCountry();
-
-		public void dislpay(int no, String street) {
-
+		public void setEmailCity(EmailCity city) {
+			this.city=city;
+			
+		}
+		public void setEmailState(EmailState state) {
+			this.state=state;
+			
+		}
+		
+		public void setEmailCountry( EmailCountry country) {
+			this.country=country;
+		}
+	
+             public void display() {
+            	 
 			System.out.println(" office number : " + no);
 			System.out.println(" office street : " + street);
-
-			city.display("mountain", false, 560081, 32000000);
-			state.display("california", "dontknow", "dont know", 31);
-			country.display("United States", "sacramento", "dianne fein", 50);
-
+            city.display();
+            state.display();
+            country.display();
+            
+            
+			
 		}
 
 }

@@ -1,7 +1,18 @@
 package com.xworkz.association1.constructor;
 
 public class EmailCity {
-	public void display(String name, boolean isDistrict, int pinCode, int population) {
+	public String name;
+	public boolean isDistrict;
+	public int pinCode;
+	public long population;
+	
+	public EmailCity(String name, boolean isDistrict, int pinCode, long population) {
+		this.name=name;
+		this.isDistrict=isDistrict;
+		this.pinCode=pinCode;
+		this.population=population;
+	}
+	public void display() {
 		System.out.println("====printing email company's city details====");
 
 		System.out.println(" city name : " + name);

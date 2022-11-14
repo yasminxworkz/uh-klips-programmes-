@@ -1,16 +1,26 @@
 package com.xworkz.association1.constructor;
 
 public class JobCompany {
-	JobLocation location = new JobLocation();
+	public String name;
+	public String ownerName;
+	JobLocation jLocation;
 
-	public void display(String name, String ownerName) {
+	public JobCompany(String name, String ownerName) {
+		this.name=name;
+		this.ownerName=ownerName;
+	}
+	
+	public void setJobLocation(JobLocation jLocation) {
+		this.jLocation=jLocation;
+	}
+	public void display() {
 		
 		System.out.println("====printing company address====");
 
 		System.out.println(" copmany name: " + name);
 		System.out.println(" copmany ownerName: " + ownerName);
 
-		location.dislpay(28, "RajKumar road,3rd stage ");
+		
 
 	}
 

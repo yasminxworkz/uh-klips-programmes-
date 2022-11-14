@@ -1,14 +1,22 @@
 package com.xworkz.association1.constructor;
 
 public class Person {
-	
-		Email email = new Email("lokesh.xworkz@gmail.com", "lok@1234", 8865745325L);
-		Email email1 = new Email("xworkzLokesh@gmail.com", "lokesh@5656", 6365689567L);
-		Email[] emails = { email, email1 };
-
-		public void display(String name) {
+	    public String name="jaya";
+		public Email[] emails ;
+        public Job job;
+		
+		public void setEmail(Email[]emails) {
+			this.emails=emails;
+		}
+		
+		public void setJob(Job job) {
+			this.job=job;
+		}
+		
+		public void display() {
 			System.out.println("====printing details of a person====");
 			System.out.println(" person name : " + name);
+			job.display();
 
 			if (emails != null && emails.length > 0) {
 				for (int i = 0; i < emails.length; i++) {
@@ -23,8 +31,7 @@ public class Person {
 			} else {
 				System.out.println("the array emails is null");
 			}
-			Job job=new Job();
-			job.display(25000, "Trainer", true);
+			
 		}
 
 	}

@@ -1,16 +1,27 @@
 package com.xworkz.association1.constructor;
 
 public class EmailCompany {
-	EmailLocation location = new EmailLocation();
+	public String name;
+	public String ownerName;
+	EmailLocation elocation;
 
-	public void display(String name, String ownerName) {
+	
+	public void setNames(String name, String ownerName) {
+		this.name=name;
+		this.ownerName=ownerName;
+	}
+	
+	public void setLocation(EmailLocation elocation) {
+		this.elocation=elocation;
+	}
+	public void display() {
 		
 		System.out.println("====printing email company address====");
 
 		System.out.println(" copmany name: " + name);
 		System.out.println(" copmany ownerName: " + ownerName);
-
-		location.dislpay(46, "Mountain view");
+       elocation.display();
+       
 
 	}
 
