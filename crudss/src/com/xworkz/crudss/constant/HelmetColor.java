@@ -1,6 +1,7 @@
 package com.xworkz.crudss.constant;
 
 public enum HelmetColor {
-	BLUE,BLACK,RED,YELLOW
+	BLUE,BLACK,RED,YELLOW,GREEN
+	
 
 }

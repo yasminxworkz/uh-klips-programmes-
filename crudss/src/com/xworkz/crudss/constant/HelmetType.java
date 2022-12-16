@@ -2,6 +2,6 @@ package com.xworkz.crudss.constant;
 
 public enum HelmetType {
 	
-	HALF,FULL,SPORTS
+	HALF,FULL,SPORTS,OFFROAD;
 
 }

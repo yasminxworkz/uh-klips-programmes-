@@ -14,6 +14,7 @@ public class HelmetDTO extends AbstractAuditDTO {
 	}
 
 	public HelmetDTO(String brand, int price, HelmetType type, HelmetColor color) {
+		
 		super();
 		this.brand = brand;
 		this.price = price;

@@ -10,6 +10,8 @@ import com.xworkz.crudss.service.HelmetServiceImp;
 
 public class HelmetRunner {
 
+	
+	
 	public static void main(String[] args) {
 
 		HelmetDTO dto = new HelmetDTO();
