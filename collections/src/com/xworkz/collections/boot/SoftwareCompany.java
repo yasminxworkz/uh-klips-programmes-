@@ -19,6 +19,16 @@ public class SoftwareCompany {
 		String softwareCompany8="Zensar Technologies";
 		String softwareCompany9="XYKA Software Pvt Ltd";
 		String softwareCompany10="Cumulations Technologies";
+		String softwareCompany11="cognizant";
+		String softwareCompany12="capegemini";
+		String softwareCompany13="samsung";
+		String softwareCompany14="TechMahindra";
+		String softwareCompany15="amazon";
+		String softwareCompany16="HCL";
+		String softwareCompany17="Cisco";
+		String softwareCompany18="mphasis";
+		String softwareCompany19="Nokia";
+		String softwareCompany20="Robert Bosch";
 		
 		Collection<String> collection=new ArrayList<String>();
 		

@@ -16,7 +16,12 @@ public class ShoeSize {
 		int shoeSize7=7;
 		int shoeSize8=6;
 		int shoeSize9=4;
-		int shoeSize10=9;
+		int shoeSize10=10;
+		int shoeSize11=8;
+		int shoeSize12=7;
+		int shoeSize13=6;
+		int shoeSize14=5;
+		int shoeSize15=5;
 		
 		Collection<Integer> collection=new ArrayList<Integer>();
 		
