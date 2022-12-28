@@ -46,6 +46,7 @@ public class CalendarDTO implements Serializable{
 		this.year = year;
 	}
 	
+	@Override
 	public boolean equals(Object date) {
 		if(date!=null) {
 			if(date instanceof CalendarDTO) {

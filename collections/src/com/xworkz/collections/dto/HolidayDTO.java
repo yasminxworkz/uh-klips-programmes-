@@ -46,6 +46,7 @@ public class HolidayDTO implements Serializable{
 		this.month = month;
 	}
 	
+	@Override
 	public boolean equals(Object festival) {
 		if(festival!=null) {
 			if(festival instanceof HolidayDTO) {
