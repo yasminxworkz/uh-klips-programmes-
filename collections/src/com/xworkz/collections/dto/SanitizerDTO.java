@@ -2,7 +2,7 @@ package com.xworkz.collections.dto;
 
 import java.io.Serializable;
 
-public class SanitizerDTO implements Comparable<SanitizerDTO>{
+public class SanitizerDTO implements Serializable{
 
 	
 	long id;
@@ -58,12 +58,7 @@ public class SanitizerDTO implements Comparable<SanitizerDTO>{
 		this.color = color;
 	}
 
-	@Override
-	public int compareTo(SanitizerDTO dto) {
-		// TODO Auto-generated method stub
-		return (this.price>dto.price)? 1:-1;
-	}
-
+	
 	
 	
 	

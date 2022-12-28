@@ -47,11 +47,7 @@ public class Sanitizer {
 		System.out.println("*************************************************************FINDING SANITIZER WITH least and max Price************************************************");
 		System.out.println(System.lineSeparator());
 		System.out.println(collect);
-		SanitizerDTO min=Collections.min(collect);
-		System.out.println("least price------"+min);
 		
-		SanitizerDTO max=Collections.max(collect);
-		System.out.println("maximum price------"+max);
 		
 		System.out.println(System.lineSeparator());
 		System.out.println("********************************************************OR*****************************************************************8");
