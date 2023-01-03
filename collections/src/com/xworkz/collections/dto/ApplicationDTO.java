@@ -1,6 +1,8 @@
 package com.xworkz.collections.dto;
 
-public class ApplicationDTO {
+import java.io.Serializable;
+
+public class ApplicationDTO implements Serializable {
 	private String name;
 	private double version;
 	private String developedBy;

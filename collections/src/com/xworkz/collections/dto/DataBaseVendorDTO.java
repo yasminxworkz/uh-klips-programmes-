@@ -1,8 +1,10 @@
 package com.xworkz.collections.dto;
 
+import java.io.Serializable;
+
 import com.xworkz.collections.constants.Type;
 
-public class DataBaseVendorDTO {
+public class DataBaseVendorDTO implements Serializable{
 	private String name;
 	private String developedBy;
 	private int size;
