@@ -29,12 +29,14 @@ public class SetRunner {
 	
 	Iterator<BottleSetDTO> it=rice.iterator();
 	
+	System.out.println(bottle1.hashCode());
 	while(it.hasNext()) {
 		BottleSetDTO s=it.next();
 		
 		System.out.println(s);
 		
 		System.out.println(" hashcode----"+System.identityHashCode(s));
+		
 	}
 	
 //		rice.add("veg rice");

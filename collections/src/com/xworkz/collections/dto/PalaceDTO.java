@@ -1,8 +1,9 @@
 package com.xworkz.collections.dto;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
-public class PalaceDTO implements Serializable {
+public class PalaceDTO implements Serializable{
 	
 	private String name;
 	private String builtBy;
@@ -45,6 +46,8 @@ public class PalaceDTO implements Serializable {
 		}
 		return false;
 	}
+	
+	
 
 	public String getName() {
 		return name;
@@ -77,6 +80,12 @@ public class PalaceDTO implements Serializable {
 	public void setVisitingFees(int visitingFees) {
 		this.visitingFees = visitingFees;
 	}
+
+	
+
+	
+
+	
 	
 
 }
