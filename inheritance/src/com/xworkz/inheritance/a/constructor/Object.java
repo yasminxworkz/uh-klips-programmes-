@@ -1,4 +1,4 @@
-package com.xworkz.inheritance.constructor;
+package com.xworkz.inheritance.a.constructor;
 
 public class Object {
 

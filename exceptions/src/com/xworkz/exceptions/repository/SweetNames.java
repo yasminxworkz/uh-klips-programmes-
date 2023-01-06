@@ -4,16 +4,22 @@ package com.xworkz.exceptions.repository;
 import com.xworkz.exceptions.exception.pointingToNullException;
 
 public class SweetNames implements Sweets {
-	String sweet=new String();
+	
+	String sweet;
 
 	@Override
 	public void sweetNames(String names) {
-		// TODO Auto-generated method stub
-		this.sweet=names;
-		System.out.println(sweet);
-		if(sweet==null) {
+		sweet=names;
+		
+		
+		if(names==null) {
 			throw new pointingToNullException();
 		}
-	}
+		System.out.println(names);
+		System.out.println(names.length());
+
+		
+		
+			}
 
 }

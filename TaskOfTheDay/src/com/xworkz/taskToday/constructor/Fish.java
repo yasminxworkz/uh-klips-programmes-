@@ -7,6 +7,7 @@ public class Fish {
 	public int price;
 	public double weight;
 	public double length;
+	public static String color;
 	
 	public Fish(String name) {
 		this.name=name;

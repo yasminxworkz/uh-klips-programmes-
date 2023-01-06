@@ -7,6 +7,7 @@ public class SweetRunner {
 	public static void main(String[] args) {
 	
 		SweetNames bakery=new SweetNames();
+		bakery.sweetNames("gulab");
 		bakery.sweetNames(null);
 		
 

@@ -68,6 +68,9 @@ public class BoatRunner {
 		System.out.println("boat.companyName: "+boat.companyName);
 		System.out.println("boat.type: "+boat.type);
 		System.out.println("boat.owner: "+boat.owner);
+		
+		
+		
 	}
 
 }

@@ -86,7 +86,7 @@ public class Tech1 {
 		System.out.println("*********************************  Example--7  ************************************");
 		for(int i=1;i<=3;i++) {
 			for(int j=1;j<=3;j++) {
-				if(i==2) {
+				if(i==2&&j==3) {
 				System.out.print("jass");
 				}
 				else {

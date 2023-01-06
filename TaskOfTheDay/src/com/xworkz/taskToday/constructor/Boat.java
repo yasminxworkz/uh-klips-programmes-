@@ -8,6 +8,7 @@ public class Boat {
 	public String type;
 	public int owner;
 	
+	
 	public Boat(String name,String color) {
 		this.name=name;
 		this.color=color;

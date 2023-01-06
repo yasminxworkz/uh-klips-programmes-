@@ -1,5 +1,7 @@
 package com.xworkz.crudss.service;
 
+import java.util.concurrent.BrokenBarrierException;
+
 import com.xworkz.crudss.constant.HelmetColor;
 import com.xworkz.crudss.constant.HelmetType;
 import com.xworkz.crudss.dto.HelmetDTO;
@@ -13,7 +15,8 @@ public class HelmetServiceImp implements HelmetService {
 	}
 
 	@Override
-	public boolean validateAndSave(HelmetDTO dto) {
+	public boolean validateAndSave(HelmetDTO dto) 
+	{
 		String brand = dto.getBrand(); // not null,min 4, max 6
 		int price = dto.getPrice(); // > 100, <10000
 		HelmetColor color = dto.getColor();// not null
@@ -23,6 +26,7 @@ public class HelmetServiceImp implements HelmetService {
 		boolean validColor = false;
 		boolean validType = false;
 
+		
 		if (brand != null && brand.length() >= 4 && brand.length() <= 6) {
 			System.out.println("Helmet is valid" + brand);
 			validBrand = true;
