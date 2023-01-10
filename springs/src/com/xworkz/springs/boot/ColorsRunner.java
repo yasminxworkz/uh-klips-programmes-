@@ -1,5 +1,7 @@
 package com.xworkz.springs.boot;
 
+import java.util.Arrays;
+
 import javax.swing.Spring;
 
 import org.springframework.context.ApplicationContext;
@@ -16,9 +18,13 @@ public class ColorsRunner {
 		ApplicationContext app= new AnnotationConfigApplicationContext(SpringConfigure.class);
 		Colors col=app.getBean(Colors.class);
 	   System.out.println(col);
+	   String[] x=app.getBeanDefinitionNames();
+	   System.out.println(Arrays.toString(x));
 	   
-	   Spring s=app.getBean("book",Spring.class);
+	   String s=app.getBean("book",String.class);
 	   System.out.println(s);
+	  Double y= app.getBean("note",Double.class);
+	  System.out.println(y);
 	   
 	   
 	   

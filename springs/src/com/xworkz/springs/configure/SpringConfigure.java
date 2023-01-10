@@ -35,69 +35,69 @@ public class SpringConfigure {
 		return s;
 	}
 	
-	@Bean
+	@Bean("book")
 	public String pen() {
 		String p=new String();
 		return p;
 	}
 	
-	@Bean
+	@Bean("note")
 	public Double noteBook() {
-		Double n=new Double("vidya");
+		Double n=new Double(324D);
 		return n;
 	}
 	
-	@Bean
+	@Bean("red")
 	public Double red() {
-		Double r=new Double("chilli");
+		Double r=new Double(2554D);
 		return r;
 	}
 	
 	@Bean
 	public Double wheel() {
-		Double w=new Double("comfort");
+		Double w=new Double(200D);
 		return w;
 	}
 	
 	@Bean
 	
 	public Double reynolds() {
-		Double r=new Double("blue");
+		Double r=new Double(234D);
 		return r;
 	}
 	
 	@Bean
 	public Double wood() {
-		Double w=new Double("box");
+		Double w=new Double(123D);
 		return w;
 	}
 	
 	@Bean
-	public boolean page() {
+	public Boolean page() {
 		Boolean b=new Boolean(false);
 		return b;
 	}
 	
 	@Bean
-	public boolean legs() {
+	public Boolean legs() {
 		Boolean l=new Boolean(true);
 		return l;
 	}
 	
 	@Bean
-	public boolean vibgyor() {
+	public Boolean vibgyor() {
 		Boolean v=new Boolean(true);
 		return v;
 	}
 	
 	@Bean
-	public boolean support() {
+	public Boolean support() {
 		Boolean s=new Boolean(true);
 		return s;
 	}
 	
 	@Bean
-	public boolean read() {
+	public Boolean read() {
 		Boolean r=new Boolean(false);
 		return r;
 	}
