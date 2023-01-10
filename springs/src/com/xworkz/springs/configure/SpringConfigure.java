@@ -14,40 +14,40 @@ public class SpringConfigure {
 	
 	@Bean
 	public String book() {
-		String b=new String();
+		String b=new String("bookMethod");
 		return b;
 	}
 	
 	@Bean
 	public String chair() {
-		String c=new String();
+		String c=new String("chairMethod");
 		return c;
 	}
 	@Bean
 	public String table() {
-		String s=new String();
+		String s=new String("tableMethod");
 		return s;
 	}
 	
 	@Bean
 	public String color() {
-		String s=new String();
+		String s=new String("colorMethod");
 		return s;
 	}
 	
-	@Bean("book")
+	@Bean
 	public String pen() {
-		String p=new String();
+		String p=new String("penMethod");
 		return p;
 	}
 	
-	@Bean("note")
+	@Bean
 	public Double noteBook() {
 		Double n=new Double(324D);
 		return n;
 	}
 	
-	@Bean("red")
+	@Bean
 	public Double red() {
 		Double r=new Double(2554D);
 		return r;
@@ -183,7 +183,7 @@ public StringBuilder institute() {
 	
 }
 
-	@Bean
+	@Bean("map")
 public  Map<Integer, String> tour(){
 	
 	Map<Integer, String> m=new HashMap<Integer, String>();
@@ -197,7 +197,7 @@ public  Map<Integer, String> tour(){
 	
     }
     
-	@Bean
+	@Bean("areas")
      public  ArrayList<String> areaNames() {
 		
     	 ArrayList<String> name=new ArrayList<String>();
