@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,79 +12,97 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan({"com.xworkz.springs"})
 public class SpringConfigure {
 	
+	@Bean
 	public String book() {
 		String b=new String();
 		return b;
 	}
 	
+	@Bean
 	public String chair() {
 		String c=new String();
 		return c;
 	}
+	@Bean
 	public String table() {
 		String s=new String();
 		return s;
 	}
+	
+	@Bean
 	public String color() {
 		String s=new String();
 		return s;
 	}
 	
+	@Bean
 	public String pen() {
 		String p=new String();
 		return p;
 	}
 	
+	@Bean
 	public Double noteBook() {
 		Double n=new Double("vidya");
 		return n;
 	}
 	
+	@Bean
 	public Double red() {
 		Double r=new Double("chilli");
 		return r;
 	}
 	
+	@Bean
 	public Double wheel() {
 		Double w=new Double("comfort");
 		return w;
 	}
+	
+	@Bean
 	
 	public Double reynolds() {
 		Double r=new Double("blue");
 		return r;
 	}
 	
+	@Bean
 	public Double wood() {
 		Double w=new Double("box");
 		return w;
 	}
 	
+	@Bean
 	public boolean page() {
 		Boolean b=new Boolean(false);
 		return b;
 	}
 	
+	@Bean
 	public boolean legs() {
 		Boolean l=new Boolean(true);
 		return l;
 	}
 	
+	@Bean
 	public boolean vibgyor() {
 		Boolean v=new Boolean(true);
 		return v;
 	}
 	
+	@Bean
 	public boolean support() {
 		Boolean s=new Boolean(true);
 		return s;
 	}
 	
+	@Bean
 	public boolean read() {
 		Boolean r=new Boolean(false);
 		return r;
 	}
 	
+	@Bean
 	public StringBuffer age() {
 		
 		StringBuffer j=new StringBuffer(18);
@@ -92,7 +111,7 @@ public class SpringConfigure {
 		
 	}
 	
-	
+	@Bean
       public StringBuffer noOfBottles() {
 		
 		StringBuffer water=new StringBuffer(16);
@@ -101,6 +120,7 @@ public class SpringConfigure {
 		
 	}
 
+	@Bean
      public StringBuffer noOfBus() {
 	
 	StringBuffer bus=new StringBuffer(100);
@@ -109,6 +129,7 @@ public class SpringConfigure {
 	
 }
 
+	@Bean
     public StringBuffer noOfPassengers() {
 	
 	StringBuffer pa=new StringBuffer(1000);
@@ -117,6 +138,7 @@ public class SpringConfigure {
 	
 }
 
+	@Bean
     public StringBuffer typeOfTrains() {
 	
 	StringBuffer tr=new StringBuffer(10);
@@ -124,34 +146,36 @@ public class SpringConfigure {
 	return tr ;
 	
 }
+	@Bean
     public StringBuilder developer() {
 		
     	StringBuilder st=new StringBuilder()	;
     	return st;
     	
     }
-    
+	@Bean
 public StringBuilder trainee() {
 		
     	StringBuilder tr=new StringBuilder('Y')	;
     	return tr;
     	
     }
-
+	
+	@Bean
 public StringBuilder nameWith() {
 	
 	StringBuilder w=new StringBuilder('M')	;
 	return w;
 	
 }
-
+	@Bean
 public StringBuilder waterCapacity() {
 	
 	StringBuilder wc=new StringBuilder(10);
 	return wc;
 	
 }
-
+	@Bean
 public StringBuilder institute() {
 	
 	StringBuilder ins=new StringBuilder("X-workz")	;
@@ -159,6 +183,7 @@ public StringBuilder institute() {
 	
 }
 
+	@Bean
 public  Map<Integer, String> tour(){
 	
 	Map<Integer, String> m=new HashMap<Integer, String>();
@@ -172,6 +197,7 @@ public  Map<Integer, String> tour(){
 	
     }
     
+	@Bean
      public  ArrayList<String> areaNames() {
 		
     	 ArrayList<String> name=new ArrayList<String>();
