@@ -29,11 +29,20 @@ public class TaskRunner {
         System.err.println(r.getName());
         System.err.println(r.getBudget());
         
+        Rocket ra=a.getBean("rocket",Rocket.class);
+        System.err.println(ra.getCountry());
+        System.err.println(ra.getName());
+        System.err.println(ra.getBudget());
+        
         Actor ac=a.getBean("bollywood",Actor.class);
         System.out.println(ac.getName());
         System.out.println(ac.getAge());
         System.out.println(ac.getLanguage());
         
+        Actor ab=a.getBean("actor",Actor.class);
+        System.out.println(ab.getName());
+        System.out.println(ab.getAge());
+        System.out.println(ab.getLanguage());
 //        String[] x=a.getBeanDefinitionNames();
 // 	   System.out.println(Arrays.toString(x));
 	}
