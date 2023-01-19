@@ -2,9 +2,6 @@ package com.xworkz.validation.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.springframework.stereotype.Component;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

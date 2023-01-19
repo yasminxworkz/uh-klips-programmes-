@@ -1,14 +1,10 @@
 package com.xworkz.validation.service;
 
 import java.util.Set;
-
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.xworkz.validation.dto.FirstAidDto;
 import com.xworkz.validation.dto.ResortDto;
 import com.xworkz.validation.repository.ResortRepo;
 
