@@ -36,11 +36,11 @@ public class WebSeries extends HttpServlet {
 		write.print("<body>");
 		write.print("<h1>");
 		write.print("<span>");
-		write.print(name);
-		write.print(lang);
-		write.print(episode);
-		write.print(ott);
-		write.print(budget);
+		write.print("name: "+name);
+		write.print("lang: "+lang);
+		write.print("episode: "+episode);
+		write.print("ott: "+ott);
+		write.print("budget: "+budget);
 		write.print("</span>");
 		write.print("</h1>");
 		write.print("</body>");
