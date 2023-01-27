@@ -42,11 +42,11 @@ public class King extends HttpServlet {
 	write.print("<body>");
 	write.print("<h1>");
 	write.print("<span style='color:red'>");
-	write.print(name);
-	write.print(region);
-	write.print(noOfQueens);
-	write.print(DOB);
-	write.print(DOD);
+	write.print(" name:"+name);
+	write.print("region: "+region);
+	write.print("noOfQueens: "+noOfQueens);
+	write.print("DOB: "+DOB);
+	write.print("DOD: "+DOD);
 	write.print("</span>");
 	write.print("</h1>");
 	write.print("</body>");
