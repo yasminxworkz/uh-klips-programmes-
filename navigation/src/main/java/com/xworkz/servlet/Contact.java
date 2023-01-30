@@ -41,9 +41,6 @@ public class Contact extends HttpServlet {
 		else {
 			writer.print("<span style='color:Red'>");
 			writer.print("length of the name exceeded Go to home page and fill properly once again");
-			writer.print("<br>");
-			writer.print("<br>");
-			writer.print("<a href=index.html>Home</a>");
 			writer.print("</span>");
 		}
 		
@@ -55,9 +52,6 @@ public class Contact extends HttpServlet {
 		else {
 			writer.print("<span style='color:Red'>");
 			writer.print("length of the mobile number exceeded Go to home page and fill properly once again");
-			writer.print("<br>");
-			writer.print("<br>");
-			writer.print("<a href=index.html>Home</a>");
 			writer.print("</span>");
 		}
 		
@@ -67,12 +61,22 @@ public class Contact extends HttpServlet {
 		else {
 			writer.print("<span style='color:Red'>");
 			writer.print("length of the comment exceeded Go to home page and fill properly once again");
+			writer.print("</span>");
+		}
+		
+if(name.length()>3&&mobile.length()>3&&comment.length()>3) {
+	writer.print("<span style='color:Green'>");
+	writer.print(" Successfully submitted");
+	writer.print("</span>");
+}
+		else {
+			writer.print("<span style='color:green'>");
+			writer.print(" submission failed");
 			writer.print("<br>");
 			writer.print("<br>");
 			writer.print("<a href=index.html>Home</a>");
 			writer.print("</span>");
 		}
-		
 		writer.print("</span>");
 		writer.print("</h1>");
 		writer.print("</body>");

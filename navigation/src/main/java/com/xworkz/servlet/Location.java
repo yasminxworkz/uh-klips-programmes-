@@ -42,9 +42,6 @@ public class Location extends HttpServlet {
 		else {
 			writer.print("<span style='color:Red'>");
 			writer.print("length of the name is less than 3 Go to home page and fill properly once again");
-			writer.print("<br>");
-			writer.print("<br>");
-			writer.print("<a href=index.html>Home</a>");
 			writer.print("</span>");
 		}
 		
@@ -56,9 +53,6 @@ public class Location extends HttpServlet {
 		else {
 			writer.print("<span style='color:Red'>");
 			writer.print("length of the startPoint is less than 3  Go to home page and fill properly once again");
-			writer.print("<br>");
-			writer.print("<br>");
-			writer.print("<a href=index.html>Home</a>");
 			writer.print("</span>");
 		}
 		
@@ -68,21 +62,32 @@ public class Location extends HttpServlet {
 		else {
 			writer.print("<span style='color:Red'>");
 			writer.print("length of the destination name exceeded Go to home page and fill properly once again");
-			writer.print("<br>");
-			writer.print("<br>");
-			writer.print("<a href=index.html>Home</a>");
 			writer.print("</span>");
 		}
 		
+		if(name.length()>3&&startPoint.length()>3&&destination.length()>3) {
+			writer.print("<span style='color:Green'>");
+			writer.print("Successfully submitted");
+			writer.print("</span>");
+				}
+				else {
+					writer.print("<span style='color:green'>");
+					writer.print(" submission failed");
+					writer.print("<br>");
+					writer.print("<br>");
+					writer.print("<a href=index.html>Home</a>");
+					writer.print("</span>");
+				}
+				writer.print("</span>");
+				writer.print("</h1>");
+				writer.print("</body>");
+				writer.print("</html>");
+				resp.setContentType("text/html");
+
+			
 		
 		
-		writer.print("<br>");
 		
-		writer.print("</span>");
-		writer.print("</h1>");
-		writer.print("</body>");
-		writer.print("</html>");
-		resp.setContentType("text/html");
 		
 	
 		
