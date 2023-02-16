@@ -42,31 +42,31 @@
         </li>
       </ul>
       <form class="d-flex">
-         <a href="movies.jsp">movies </a>
+         <a href="index.jsp">home </a>
         
       </form>
-      
-     <form class="d-flex">
-         <a href="CM.jsp">CM </a>
-        
-      </form>
+     
     </div>
   </div>
 </nav>
+<form action="CM" method="post">
+name<input class="form-control form-control-lg" type="text" name="name" >
+state<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="state">
+  <option value="">Open this select menu</option>
+  <option >karnataka</option>
+  <option >A.P</option>
+  <option >T.N</option>
+</select>
+tenure<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="tenure">
+  <option value="">Open this select menu</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</select>
+age<input class="form-control form-control-lg"  type="number" name="age" >
+<input type="submit" value="submit">
 
-      
-      
-    <h1>welcome to theatre</h1>
 
-       
- 
-  
-  
-  
-       
-      
-       
-
-
+</form>
 </body>
 </html>

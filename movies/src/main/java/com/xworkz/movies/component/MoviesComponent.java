@@ -1,12 +1,16 @@
 package com.xworkz.movies.component;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import com.xworkz.movies.Service.MoviesService;
+
 import com.xworkz.movies.dto.MoviesDTO;
 
 @Component
@@ -28,4 +32,6 @@ public class MoviesComponent {
 		System.out.println(dto);
 		return "index";
 	}
+	
+	
 }
