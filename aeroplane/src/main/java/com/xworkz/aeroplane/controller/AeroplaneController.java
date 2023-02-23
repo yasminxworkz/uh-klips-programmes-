@@ -31,14 +31,27 @@ public class AeroplaneController {
 		AeroplaneDTO dto=service.findById(id);
 		if(dto!=null) {
 			model.addAttribute("dto", dto);
+			return "search";
+
+		}else {
+			model.addAttribute("message","message *****no data found for id");
+			return "search";
+
 		}
-		else {
-			model.addAttribute("message", "no data found for id");
-		}
-		return "search";
+		
+		
 
 		
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 	

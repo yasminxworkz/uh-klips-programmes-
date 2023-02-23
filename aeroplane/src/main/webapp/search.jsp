@@ -36,6 +36,8 @@
       
       
     <h1>search</h1>
+    
+    <h1>${message}</h1>
   <form action="search"  method="get">
   
  Search By Id <input type="text" name="id"/>
