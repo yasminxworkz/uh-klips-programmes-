@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>   <!-- it is the import statement of jstl. jstl is imported to use special tags like foreach loop -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,8 +33,21 @@
           <a class="nav-link" style="color: red" href="NameSearch.jsp">SearchByName</a>
         </li>
         
+         <li class="nav-item">
+          <a class="nav-link" style="color: red" href="findAll.jsp">FindAll</a>
+        </li>
         
+        <li class="nav-item">
+          <a class="nav-link" style="color: red" href="SearchByTwoProp.jsp">SearchByTwoProperties</a>
+        </li>
         
+         <li class="nav-item">
+          <a class="nav-link" style="color: red" href="imageUpload.jsp">ImageUpload</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" style="color: red" href="imageDownload.jsp">ImageDownload</a>
+        </li>
       </ul>
       
       

@@ -1,10 +1,21 @@
 package com.xworkz.apps.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
@@ -12,21 +23,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.xworkz.apps.dto.AppDTO;
 import com.xworkz.apps.services.AppService;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 
 @Component
+@Slf4j
 @RequestMapping("/")
 public class AppController {
 
 	@Autowired
-	AppService service;
+	AppService service ;
 	
 	public AppController() {
-		System.out.println("created "+getClass().getSimpleName());
+	log.info("created"+getClass().getSimpleName());
+		
 	}
 	
 	@GetMapping("/search")
@@ -49,7 +65,7 @@ public class AppController {
 	
 	@GetMapping("/NameSearch")
 	public String onNameSearch(@RequestParam String name,Model model) {
-		System.out.println("running onNameSearch controller "+name);
+		log.info("running onNameSearch controller "+name);
 		List<AppDTO> list=this.service.findByName(name);
 		if(list!=null & !list.isEmpty()) {
 		model.addAttribute("list", list);
@@ -66,21 +82,22 @@ public class AppController {
 	
 	@PostMapping("/apps")
 	public String onApp(Model model,AppDTO dto) {
-		System.out.println("running postMethod in controller.........");
+		log.info("running postMethod in controller.........");
 		Set<ConstraintViolation<AppDTO>> violations = service.validateAndSave(dto);
-		System.out.println(dto);
-		model.addAttribute("violations", violations);
+		log.info("dto"+dto);
+		model.addAttribute("message", violations);
 		
 if (!violations.isEmpty()) {
 			
 			System.err.println("validation failed,display error message");
 			violations.forEach((cv) -> {
 				System.err.println(cv.getMessage());
+				
 			});
 			return "app";
 
 		} else {
-			System.out.println("validation success,display success message");
+			log.info("validation success,display success message");
 
 			return "success";
 
@@ -91,9 +108,9 @@ if (!violations.isEmpty()) {
 	
 	@PostMapping("/update")
 	public String onUpdate(Model model,AppDTO dto) {
-		System.out.println("running postMethod in controller.........");
+		log.info("running postMethod in controller.........");
 		Set<ConstraintViolation<AppDTO>> violations = service.update(dto);
-		System.out.println(dto);
+		log.info("dto"+dto);
 		
 		
 if (violations.size()>0) {
@@ -111,7 +128,7 @@ if (violations.size()>0) {
 	
 	@GetMapping("/update")
 	public String onUpdateSearch(@RequestParam int id,Model model) {
-		System.out.println("running onupdate controller "+id);
+		log.info("running onupdate controller "+id);
 		AppDTO dto=this.service.findById(id);
 	
 		model.addAttribute("dto", dto);
@@ -130,8 +147,60 @@ if (violations.size()>0) {
 			return "NameSearch";
 
 		}
+	
+	@GetMapping("/find")
+	public String findAll(Model model) {
 		
+		List<AppDTO> list=this.service.findAll();
 		
+		if (list != null) {
+			
+			model.addAttribute("dto", list);
+		} else {
+			model.addAttribute("mesage", "Do not found ");
+		}
+		return "findAll";
+	}
+	
+	@GetMapping("/searchByTwoProp")	
+	public String onSearchByTwoProp(@RequestParam(value="developedBy",required=false) String developedBy,
+			@RequestParam(value="type",required=false) String type, Model model) { 
+
+		log.info("running onSearchName controller " + developedBy);
+		List<AppDTO> list = this.service.findByTwoProp(developedBy, type);
+		model.addAttribute("list", list);
+
+		return "SearchByTwoProp";
+
+	}
+	
+	@PostMapping("/upload")
+	public String onUpload(@RequestParam("chitra")MultipartFile multipartFile, Model model) throws IOException {
+		log.info("multipartFile "+multipartFile);
+		log.info(multipartFile.getOriginalFilename());
+		log.info(multipartFile.getContentType());
+		log.info("size"+multipartFile.getSize());
+		log.info("getBytes"+multipartFile.getBytes());
+		
+		byte[] bytes=multipartFile.getBytes();
+		Path path=Paths.get("D:\\food-files\\"+multipartFile.getOriginalFilename());
+		Files.write(path,bytes);
+		
+		model.addAttribute("message", "successfully uploaded..................");
+		return "imageUpload";
+	}
+		
+	
+	   @GetMapping("/download")
+		public void onDownload(HttpServletResponse response, @RequestParam String fileName) throws IOException {
+			
+			response.setContentType("image/jpeg");
+			File file=new File("D:\\food-files\\"+fileName);
+			InputStream in=new BufferedInputStream(new FileInputStream(file));
+			ServletOutputStream out=response.getOutputStream();
+			IOUtils.copy(in, out);
+			response.flushBuffer();
+		}
 		
 		
 	}

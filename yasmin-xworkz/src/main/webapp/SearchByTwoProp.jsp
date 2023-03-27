@@ -26,22 +26,51 @@
         </li>
         
       </ul>
-      
-      
-     
+   
     </div>
   </div>
 </nav>
-    
-    <h1>Delete</h1>
-    
-     <h1 style="color: red">${message}</h1>
-  <form action="delete"  method="get">
-  
- Search By Id <input type="text" name="id"/>
- <input type="submit" value="Delete">
-  
-  </form>
 
+    <h1>searchByTwoProp </h1>
+	<h4 style="color: red">${mesage}</h4>
+	<form action="searchByTwoProp" method="get">
+		Search by Two Properties <input type="text" class="search"
+			placeholder="DevelopedBy" name="developedBy"> <input type="text"
+			name="type" class="search" placeholder="Type"/ > <input
+			type="submit" value="search">
+	</form>
+<div>
+  <table class="table table-bordered">
+  <tr>
+  <th class="table-dark">Id</th>
+   <th class="table-dark">name</th>
+  <th class="table-dark">developedBy</th>
+  <th class="table-dark">type</th>
+  <th class="table-dark">noOfProducts</th>
+  <th class="table-dark">noOfEmployes</th>
+  <th class="table-dark">Edit</th>
+  <th class="table-dark">Delete</th>
+ 
+  </tr>
+  
+  <c:forEach items="${list}" var="n">
+  <tr>
+  
+  
+   <td >${n.id} </td>
+   <td >${n.name} </td>
+    <td>${n.developedBy}</td>
+    <td>${n.type}</td>
+     <td>${n.noOfProducts}</td>
+      <td>${n.noOfEmployes}</td>
+      <td><a href="update?id=${n.id}">edit</a> </td>
+      <td><a href="delete?id=${n.id}">delete</a> </td>
+  
+  </tr>
+ 
+  </c:forEach>
+  
+  </table>
+ </div>
 </body>
 </html>

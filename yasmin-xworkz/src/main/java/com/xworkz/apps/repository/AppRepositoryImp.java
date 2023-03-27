@@ -13,13 +13,17 @@ import org.springframework.stereotype.Repository;
 
 import com.xworkz.apps.entity.AppEntity;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Repository
+@Slf4j
 public class AppRepositoryImp implements AppRepo{
-     @Autowired
+    
+	@Autowired
 	EntityManagerFactory factory;
      
      public AppRepositoryImp() {
-		System.out.println("created "+getClass().getSimpleName());
+		log.info("created "+getClass().getSimpleName());
 	}
      
 	@Override
@@ -36,7 +40,7 @@ public class AppRepositoryImp implements AppRepo{
 	
 	@Override
 	public AppEntity findById(int id) {
-		System.out.println("find by id in method of repo.......... ");
+		log.info("find by id in method of repo.......... ");
 		EntityManager entityManager = factory.createEntityManager();
 		AppEntity aEntity = entityManager.find(AppEntity.class, id);
 		entityManager.close();
@@ -51,7 +55,7 @@ public class AppRepositoryImp implements AppRepo{
 		Query query=manager.createNamedQuery("findByName");
 	query.setParameter("by", name);
 	List<AppEntity> list=query.getResultList();
-	System.out.println("total list found in repo "+list.size());
+	log.info("total list found in repo "+list.size());
 	
 		return list;
 	}
@@ -85,7 +89,7 @@ public class AppRepositoryImp implements AppRepo{
 
 	@Override
 	public boolean deleteById(int id) {
-		System.out.println("running deleteById in repo.............");
+		log.info("running deleteById in repo.............");
 		EntityManager manager=this.factory.createEntityManager();
 		
 		AppEntity aEntity = manager.find(AppEntity.class, id);
@@ -101,7 +105,43 @@ public class AppRepositoryImp implements AppRepo{
 		finally {
 			manager.close();
 		}
+																	
+	}
+
+	@Override
+	public List<AppEntity> findAll() {
+		EntityManager manager=this.factory.createEntityManager();
+		
+		try {
+		Query query=manager.createNamedQuery("findAll");
+		List<AppEntity> list=query.getResultList();
+	
+		return list;
+		}
+		finally {
+			manager.close();
+		}
+	}
+	
+
+	@Override
+	public List<AppEntity> findByTwoProp(String developedBy, String type) {
+		EntityManager manager = this.factory.createEntityManager();
+		
+		try {
+			Query query = manager.createNamedQuery("findByTwoProp");
+			query.setParameter("developedBy", developedBy);
+			query.setParameter("type", type);
+			List<AppEntity> list = query.getResultList();
+			log.info("Total List found in repo.." + list.size());
+			return list;
+
+		} finally {
+			manager.close();
+		}
 		
 	}
+
+
 	
 }

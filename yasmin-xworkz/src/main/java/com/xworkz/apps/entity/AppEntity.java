@@ -9,11 +9,14 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @Entity
 @Table(name = "foodApp")
 @NamedQuery(name="findByName", query = "select e from AppEntity e where e.name=:by")
+@NamedQuery(name="findAll", query = "select e from AppEntity e")
+@NamedQuery(name = "findByTwoProp", query = "select e from AppEntity e where e.developedBy=:developedBy or e.type=:type")
 public class AppEntity {
 	
 	

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+     <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+
 
 </head>
 <body>
@@ -26,22 +27,19 @@
         </li>
         
       </ul>
-      
-      
+     
      
     </div>
   </div>
 </nav>
-    
-    <h1>Delete</h1>
-    
-     <h1 style="color: red">${message}</h1>
-  <form action="delete"  method="get">
-  
- Search By Id <input type="text" name="id"/>
- <input type="submit" value="Delete">
-  
-  </form>
+<body>
+
+<h1>upload image test</h1>
+<h4 style="color: red">${message}</h4>
+<form action="upload" method="post" enctype="multipart/form-data">
+upload : <input type="file" name="chitra"/>
+<input type="submit" value="Upload"/>
+</form>
 
 </body>
 </html>

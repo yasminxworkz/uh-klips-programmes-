@@ -4,15 +4,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Configuration
 @ComponentScan("com.xworkz.apps")
+@Slf4j
 public class AppConfiguration {
 	
 	public AppConfiguration() {
-		System.out.println("created "+getClass().getSimpleName());
+		log.info("created "+getClass().getSimpleName());
 	}
 	
 	@Bean
@@ -22,9 +27,20 @@ public class AppConfiguration {
 	}
 	
 	@Bean
+	public MultipartResolver multipartResolver() {  
+		log.info("registering multipartResolver");
+		return new StandardServletMultipartResolver();
+	}// used to process html form which is enctype.
+	
+	
+	
+	
+	
+	@Bean
 	public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean() {
-		LocalContainerEntityManagerFactoryBean local=new LocalContainerEntityManagerFactoryBean();
-		return local;
+		LocalContainerEntityManagerFactoryBean bean=new LocalContainerEntityManagerFactoryBean();
+		return bean;
+		
 	}
 
 }

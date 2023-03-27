@@ -54,7 +54,8 @@
   <th class="table-dark">type</th>
   <th class="table-dark">noOfProducts</th>
   <th class="table-dark">noOfEmployes</th>
- 
+  <th class="table-dark">Edit</th>
+  <th class="table-dark">Delete</th>
   
    
   

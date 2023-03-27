@@ -32,12 +32,14 @@
     </div>
   </div>
 </nav>
+
+<h1 style="color:red">${message}</h1>
 <form action="apps" method="post">
 
-developedBy<input class="form-control form-control-lg" type="text" name="developedBy" />
+developedBy<input class="form-control form-control-lg" type="text" name="developedBy"  />
 type<input class="form-control form-control-lg" type="text" name="type" />
-noOfProducts<input class="form-control form-control-lg" type="number" name="noOfProducts" />
-noOfEmployes<input class="form-control form-control-lg" type="number" name="noOfEmployes" />
+noOfProducts<input class="form-control form-control-lg" type="number"  name="noOfProducts" />
+noOfEmployes<input class="form-control form-control-lg" type="number"  name="noOfEmployes" />
 name<input class="form-control form-control-lg" type="text" name="name" />
 
 
