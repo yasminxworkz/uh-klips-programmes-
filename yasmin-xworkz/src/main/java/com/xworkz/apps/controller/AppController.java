@@ -118,8 +118,7 @@ if (violations.size()>0) {
 	model.addAttribute("errors", violations);
 	} 
        else {
-			
-			model.addAttribute("message", "update was success");
+		model.addAttribute("message", "update was success");
 
 		}
 		
