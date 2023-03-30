@@ -30,7 +30,7 @@ public class EntityClass {
 	private String email;
    
    @Column(name = "p_mobile")
-	private Long mobile;
+	private Long mobileNumber;
    
    @Column(name = "p_password")
 	private String password;
@@ -45,5 +45,5 @@ public class EntityClass {
 	private String updatedBy;
    
    @Column(name = "p_updatedDate")
-	private LocalDateTime updatedDate=LocalDateTime.now();
+	private LocalDateTime updatedDate;
 }

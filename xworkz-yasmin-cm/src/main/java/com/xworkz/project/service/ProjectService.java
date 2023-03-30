@@ -13,5 +13,7 @@ public interface ProjectService {
 	Set<ConstraintViolation<DTOClass>> validateAndSave(DTOClass dto);
 	
 	List<DTOClass> uniqueCheck();
+	
+	boolean sendMail(String to);
 
 }

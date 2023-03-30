@@ -1,5 +1,6 @@
 package com.xworkz.project.dto;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -17,15 +18,16 @@ public class DTOClass {
 	private String userId;
 	@NotNull
 	@Size(min = 4, max = 50)
+	@Email
 	private String email;
 	@Min(value = 6000000000l, message = "the number should start with 6 and must contain 10 digits ")
 	@Max(value = 9999999999l, message = "the number should start with 6 and must contain 10 digits " )
 	private Long mobileNumber;
 	@NotNull
+	@Size(min = 3, max = 50)
 	private String password;
 	private String agreement;
-//	@Size(min = 4, max = 50)
-//	private String createdBy="yasmin";
-//	@Size(min = 4, max = 50)
-//	private String updatedBy="yasminn";
+	@Size(min = 4, max = 50)
+	private String Confirmpassword;
+
 }

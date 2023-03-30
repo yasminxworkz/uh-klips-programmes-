@@ -42,15 +42,31 @@ public class ComponentClass {
 			if (d.getUserId().equalsIgnoreCase(dto.getUserId())) {
 				model.addAttribute("uniqueError", "user name already exist");
 
-				if (d.getEmail().equalsIgnoreCase(dto.getEmail())) {
-					model.addAttribute("uniqueError", "userName and  email already exist");
-
-					model.addAttribute("dto", dto);
-					return "save";
-
-				}
+				model.addAttribute("dto", dto);
+				return "save";
 			}
+
+			if (d.getEmail().equalsIgnoreCase(dto.getEmail())) {
+				model.addAttribute("uniqueError", "email already exist");
+				model.addAttribute("dto", dto);
+				return "save";
+			}
+			
+			if(d.getMobileNumber().equals(dto.getMobileNumber())) {
+				model.addAttribute("uniqueError", "MobileNumber already exist");
+				model.addAttribute("dto", dto);
+				return "save";
+			}
+
+			
 		}
+		
+		if (!dto.getConfirmpassword().equals(dto.getPassword())) {
+			model.addAttribute("confirm", "confirm  password is not same");
+			model.addAttribute("dto", dto);
+			return "save";
+		}
+
 
 		Set<ConstraintViolation<DTOClass>> violations = service.validateAndSave(dto);
 		log.info("dto" + dto);
@@ -63,8 +79,8 @@ public class ComponentClass {
 				System.err.println(cv.getMessage());
 
 			});
-			return "save";
 
+			return "save";
 		}
 
 		else {
