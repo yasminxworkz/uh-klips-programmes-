@@ -8,7 +8,24 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style >
 
+.center-form{
+
+justify-content: center;
+
+display: flex;
+
+margin: 40px 50px;
+
+border: 3px solid blue;
+
+padding: 30px;
+
+background-color: rgb(208, 205, 248);
+
+}
+</style>
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -24,9 +41,11 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="save.jsp">register</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="SignUp.jsp">SignUp</a>
+        
+         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
         </li>
+        
       </ul>
       
       
@@ -37,9 +56,34 @@
   </div>
 </nav>
 
+
+    <h1 style="color:red">${message}</h1>
+ 
+    
+    <br>
+    <br>
+    
       
-      
-    <h1 style="color: white;">welcome to the project</h1>
+ 
+ <div class="center-form">
+    
+    <form action="signUp" method="get" class="altering">
+ 
+    
+    </form>
+   
+   </div>
+   
+     <c:forEach items="${list}" var="n">
+     <h1>${n.userId}</h1>
+     </c:forEach>
+    
+    
+    
+  
+    
+    
+    
 
        
  

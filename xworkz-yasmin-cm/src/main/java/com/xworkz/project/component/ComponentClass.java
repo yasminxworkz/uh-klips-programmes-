@@ -8,8 +8,10 @@ import javax.validation.ConstraintViolation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mysql.cj.log.Log;
 
@@ -31,7 +33,7 @@ public class ComponentClass {
 	}
 
 	@PostMapping("/save")
-	public String onSave(Model model, DTOClass dto) {
+	public String onSave(DTOClass dto,Model model) {
 
 		log.info("running postMethod in controller.........");
 
@@ -43,7 +45,7 @@ public class ComponentClass {
 				model.addAttribute("uniqueError", "user name already exist");
 
 				model.addAttribute("dto", dto);
-				return "save";
+				return "save"; 
 			}
 
 			if (d.getEmail().equalsIgnoreCase(dto.getEmail())) {
@@ -61,7 +63,7 @@ public class ComponentClass {
 			
 		}
 		
-		if (!dto.getConfirmpassword().equals(dto.getPassword())) {
+		if (!dto.getConfirmPassword().equals(dto.getPassword())) {
 			model.addAttribute("confirm", "confirm  password is not same");
 			model.addAttribute("dto", dto);
 			return "save";
@@ -90,5 +92,23 @@ public class ComponentClass {
 			return "success";
 		}
 
+	}
+	
+	@GetMapping("/signUp")
+	public String onSignUp(@RequestParam(value = "userId", required = false) String userId,
+			               @RequestParam(value = "password", required = false) String password, Model model) {
+		
+		List<DTOClass> list=this.service.findByUserIdAndPassword(userId, password);
+		
+		if(list!=null & !list.isEmpty()) {
+			model.addAttribute("list", list);
+			model.addAttribute("message", "*****        Welcome     *****");
+			return "LoginSuccess";
+		}
+			else {
+				model.addAttribute("message", "********************userId or password is incorrect***********");
+				return "SignUp";
+			}
+		
 	}
 }

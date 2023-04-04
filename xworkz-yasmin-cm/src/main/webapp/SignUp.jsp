@@ -24,9 +24,11 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="save.jsp">register</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="SignUp.jsp">SignUp</a>
+        
+         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
         </li>
+        
       </ul>
       
       
@@ -37,9 +39,32 @@
   </div>
 </nav>
 
-      
-      
-    <h1 style="color: white;">welcome to the project</h1>
+
+    <h1 style="color: blue;">SignUp page</h1>
+    
+    <br>
+    <br>
+    
+      <h1 style="color: red">${message}</h1>
+ 
+    
+    <form action="signUp" method="get">
+  UserId <input type="text" class="form-control form-control-lg" placeholder="userId" name="userId"> <br>
+    Password      <input type="text" class="form-control form-control-lg" placeholder="password" name="password"><br>
+          <input type="submit" value="signUp" >
+    
+    </form>
+   
+     <c:forEach items="${list}" var="n">
+     
+     </c:forEach>
+    
+    
+    
+  
+    
+    
+    
 
        
  

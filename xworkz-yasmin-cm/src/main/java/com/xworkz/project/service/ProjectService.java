@@ -5,8 +5,9 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
+
 import com.xworkz.project.dto.DTOClass;
-import com.xworkz.project.entity.EntityClass;
+
 
 public interface ProjectService {
 
@@ -15,5 +16,9 @@ public interface ProjectService {
 	List<DTOClass> uniqueCheck();
 	
 	boolean sendMail(String to);
+	
+	 default List<DTOClass> findByUserIdAndPassword(String userId,String password){
+	    	return null;
+	    }
 
 }

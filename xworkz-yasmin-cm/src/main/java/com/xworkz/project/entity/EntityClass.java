@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Table(name = "userDetails")
 @NamedQuery(name = "fetchAll",query ="select entity from EntityClass entity" )
+@NamedQuery(name = "findByuserIdAndPassword", query = "select entity from EntityClass entity where entity.userId=:by and entity.password=:p")
 public class EntityClass {
    @Id
    @Column(name = "p_signUpId")

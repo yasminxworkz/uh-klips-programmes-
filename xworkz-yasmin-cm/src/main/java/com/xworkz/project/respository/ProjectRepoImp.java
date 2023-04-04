@@ -17,6 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 @Repository
 @Slf4j
 public class ProjectRepoImp implements ProjectRepo {
+	
+
 	@Autowired
 	EntityManagerFactory factory;
 
@@ -45,6 +47,21 @@ public class ProjectRepoImp implements ProjectRepo {
 		} finally {
 			manager.close();
 		}
+	}
+	
+	@Override
+	public List<EntityClass> findByUserIdAndPassword(String userId, String password) {
+		EntityManager manager=this.factory.createEntityManager();
+	try {	Query query=manager.createNamedQuery("findByuserIdAndPassword");
+		query.setParameter("by", userId);
+		query.setParameter("p", password);
+		List<EntityClass> list=query.getResultList();
+		log.info("total list found in repo "+list.size());
+		return list;
+	}
+	finally {
+		manager.close();
+	}
 	}
 
 }
