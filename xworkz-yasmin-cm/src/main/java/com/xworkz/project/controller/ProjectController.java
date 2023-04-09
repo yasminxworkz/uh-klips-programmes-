@@ -1,4 +1,4 @@
-package com.xworkz.project.component;
+package com.xworkz.project.controller;
 
 import java.util.List;
 import java.util.Set;
@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mysql.cj.log.Log;
 
-import com.xworkz.project.dto.DTOClass;
+
+import com.xworkz.project.dto.ProjectDTO;
 import com.xworkz.project.service.ProjectService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,23 +24,23 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 @RequestMapping("/")
-public class ComponentClass {
+public class ProjectController {
 
 	@Autowired
 	ProjectService service;
 
-	public ComponentClass() {
+	public ProjectController() {
 		log.info("running ComponentClass................");
 	}
 
 	@PostMapping("/save")
-	public String onSave(DTOClass dto,Model model) {
+	public String onSave(ProjectDTO dto,Model model) {
 
 		log.info("running postMethod in controller.........");
 
-		List<DTOClass> dtos = service.uniqueCheck();
+		List<ProjectDTO> dtos = service.uniqueCheck();
 
-		for (DTOClass d : dtos) {
+		for (ProjectDTO d : dtos) {
 
 			if (d.getUserId().equalsIgnoreCase(dto.getUserId())) {
 				model.addAttribute("uniqueError", "user name already exist");
@@ -70,7 +71,7 @@ public class ComponentClass {
 		}
 
 
-		Set<ConstraintViolation<DTOClass>> violations = service.validateAndSave(dto);
+		Set<ConstraintViolation<ProjectDTO>> violations = service.validateAndSave(dto);
 		log.info("dto" + dto);
 		model.addAttribute("message", violations);
 
@@ -94,21 +95,64 @@ public class ComponentClass {
 
 	}
 	
-	@GetMapping("/signUp")
-	public String onSignUp(@RequestParam(value = "userId", required = false) String userId,
-			               @RequestParam(value = "password", required = false) String password, Model model) {
+	@GetMapping("/SignIn")
+	public String onSignIn(@RequestParam String userId,
+			               @RequestParam String password, Model model) {
 		
-		List<DTOClass> list=this.service.findByUserIdAndPassword(userId, password);
+		String msg=this.service.SignIn(userId, password);
+		ProjectDTO dto=this.service.findByUserId(userId);
 		
-		if(list!=null & !list.isEmpty()) {
-			model.addAttribute("list", list);
-			model.addAttribute("message", "*****        Welcome     *****");
+		if(msg=="") {
+			
+			if(dto.getResetPassword()==true) {
+				model.addAttribute("userId",  dto.getUserId());
+				return "UpdateNewPassword";
+			}
+			
+			model.addAttribute("successMsg", "*****        Welcome     *****" +userId);
 			return "LoginSuccess";
 		}
 			else {
-				model.addAttribute("message", "********************userId or password is incorrect***********");
-				return "SignUp";
+				model.addAttribute("message", msg);
+				return "SignIn";
 			}
 		
 	}
+	
+	@PostMapping("/forgot")
+	public String onForgotPassword(@RequestParam String email,Model model) {
+		
+		boolean reset=this.service.forgotPassword(email);
+		
+		if(reset==true) {
+			model.addAttribute("resetMsg", "password reset successfull..");
+			return "forgotPassword";	
+		}
+		
+		model.addAttribute("resetError", "email doesnot exist..");
+		return "forgotPassword";	
+	}
+	
+	
+	
+	@PostMapping("/updatePassword")
+	public String onUpdate(@RequestParam String userId, @RequestParam String password,Model model) {
+		log.info("running onUpdate in controller........");
+		log.info("new password entered by user in controller ........."+password);
+		
+		ProjectDTO dto=this.service.findByUserId(userId);
+		
+		if(dto!=null) {
+			dto.setPassword(password);
+			boolean updated=this.service.updateEntity(dto);
+			log.info("password updated ?? "+updated);
+			model.addAttribute("successMsg", "*****        Welcome     *****"+userId);
+			return "LoginSuccess";
+		}
+		
+		model.addAttribute("error", "invalid password");
+		return "UpdateNewPassword";
+		
+	}
+	
 }

@@ -10,20 +10,20 @@ import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.xworkz.project.entity.EntityClass;
+
+import com.xworkz.project.entity.ProjectEntity;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Repository
 @Slf4j
 public class ProjectRepoImp implements ProjectRepo {
-	
 
 	@Autowired
 	EntityManagerFactory factory;
 
 	@Override
-	public boolean save(EntityClass entity) {
+	public boolean save(ProjectEntity entity) {
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
 		transaction.begin();
@@ -35,12 +35,12 @@ public class ProjectRepoImp implements ProjectRepo {
 	}
 
 	@Override
-	public List<EntityClass> uniqueCheck() {
-		
+	public List<ProjectEntity> uniqueCheck() {
+
 		EntityManager manager = this.factory.createEntityManager();
 		try {
 			Query query = manager.createNamedQuery("fetchAll");
-			List<EntityClass> list = query.getResultList();
+			List<ProjectEntity> list = query.getResultList();
 			log.info("total list found in repo " + list.size());
 
 			return list;
@@ -48,20 +48,37 @@ public class ProjectRepoImp implements ProjectRepo {
 			manager.close();
 		}
 	}
-	
+
 	@Override
-	public List<EntityClass> findByUserIdAndPassword(String userId, String password) {
-		EntityManager manager=this.factory.createEntityManager();
-	try {	Query query=manager.createNamedQuery("findByuserIdAndPassword");
-		query.setParameter("by", userId);
-		query.setParameter("p", password);
-		List<EntityClass> list=query.getResultList();
-		log.info("total list found in repo "+list.size());
-		return list;
-	}
-	finally {
-		manager.close();
-	}
+	public ProjectEntity findByUserIdAndPassword(String userId) {
+		EntityManager manager = this.factory.createEntityManager();
+		try {
+			Query query = manager.createNamedQuery("findByuserIdAndPassword");
+			query.setParameter("by", userId);
+			Object obj = query.getSingleResult();
+			ProjectEntity ent = (ProjectEntity) obj;
+			return ent;
+		} catch (Exception e) {
+			log.info("no data found for!!!!! " + userId);
+			return null;
+
+		} finally {
+			manager.close();
+		}
+
 	}
 
+	@Override
+	public boolean updateEntity(ProjectEntity entity) {
+		EntityManager manager = factory.createEntityManager();
+		try {
+			EntityTransaction transaction = manager.getTransaction();
+			transaction.begin();
+			manager.merge(entity);
+			transaction.commit();
+			return true;
+		} finally {
+			manager.close();
+		}
+	}
 }

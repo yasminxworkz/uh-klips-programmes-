@@ -248,7 +248,6 @@
 				if (cValue != pValue) {
 					document.getElementById('passwordError').innerHTML = 'Invalid password,please confirm the entered password,';
 					document.getElementById('submitId').disabled = 'disabled';
-
 				}
 			}
 
@@ -259,6 +258,20 @@
 				document.getElementById('passwordError').innerHTML = 'Invalid password  please enter min 3 and max 30';
 			}
 
+		}
+		
+		function onAgreement() {
+			
+			var agrement=document.getElementById('agreement');
+			console.log(agrement.checked);
+			if(agrement.checked)
+				{
+				document.getElementById('submitId').disabled=false;
+				}
+			else{
+				document.getElementById('submitId').disabled='disabled';
+			}
+			
 		}
 		
 		

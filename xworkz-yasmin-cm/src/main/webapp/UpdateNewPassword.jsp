@@ -39,7 +39,53 @@
 
       
       
-    <h1 style="color: white;">welcome to the project</h1>
+    <h3 style="color: blue;">${userId}</h3>
+    
+     <form action="updatePassword?userId=${userId}" method="post">
+  new password <input type="password" class="form-control form-control-lg" placeholder="userId" id="secure" name="password" onchange="onPassword()"> <br>
+ 
+   ConfirmPassword<input class="form-control form-control-lg" type="password"  id="pass"onchange="onPassword()" value="${dto.password}" /> 
+		<span id="passwordError" style="color: red"></span><br>
+          <input type="submit" value="update" id="submitId" disabled="disabled" class="btn-btn-dark btn-lg"/>
+   
+    </form>
+   <h2 style="color:blue">please set your new password</h2>
+   <br>
+   <span style="color: red" id="passwordError"></span>
+   
+     <script >
+
+     function onPassword() {
+			console.log("running onUser")
+			var pInput = document.getElementById('secure');
+			var pValue = pInput.value;
+			var cInput = document.getElementById('pass')
+			var cValue = cInput.value;
+			console.log(pValue);
+			console.log(cValue);
+			if (pValue.length > 3 && pValue.length < 30) {
+
+				console.log('valid password');
+				
+					document.getElementById('submitId').disabled = false;
+					document.getElementById('passwordError').innerHTML = '';
+
+				if (cValue != pValue) {
+					document.getElementById('passwordError').innerHTML = 'Invalid password,please confirm the entered password,';
+					document.getElementById('submitId').disabled = 'disabled';
+				}
+			}
+
+			else {
+				console.log('invalid password');
+				document.getElementById('submitId').disabled = 'disabled';
+
+				document.getElementById('passwordError').innerHTML = 'Invalid password  please enter min 3 and max 30';
+			}
+
+		}
+</script >
+    
 
        
  

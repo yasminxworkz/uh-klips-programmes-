@@ -1,5 +1,6 @@
 package com.xworkz.project.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -18,12 +19,17 @@ import javax.mail.internet.MimeMessage;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 
+import org.passay.CharacterRule;
+import org.passay.EnglishCharacterData;
+import org.passay.PasswordGenerator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.xworkz.project.dto.DTOClass;
-import com.xworkz.project.entity.EntityClass;
+
+import com.xworkz.project.dto.ProjectDTO;
+import com.xworkz.project.entity.ProjectEntity;
 import com.xworkz.project.respository.ProjectRepo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,14 +41,17 @@ public class ProjectServiceImp implements ProjectService {
 	@Autowired
 	ProjectRepo repo;
 
+	@Autowired
+	PasswordEncoder encoder;
+
 	public ProjectServiceImp() {
 		log.info("created " + getClass().getSimpleName());
 	}
 
 	@Override
-	public Set<ConstraintViolation<DTOClass>> validateAndSave(DTOClass dto) {
+	public Set<ConstraintViolation<ProjectDTO>> validateAndSave(ProjectDTO dto) {
 
-		Set<ConstraintViolation<DTOClass>> violations = Validation.buildDefaultValidatorFactory().getValidator()
+		Set<ConstraintViolation<ProjectDTO>> violations = Validation.buildDefaultValidatorFactory().getValidator()
 				.validate(dto);
 
 		if (violations != null && !violations.isEmpty()) {
@@ -52,27 +61,29 @@ public class ProjectServiceImp implements ProjectService {
 		}
 
 		log.info("no violations present,data can be saved");
-		EntityClass entity = new EntityClass();
+		ProjectEntity entity = new ProjectEntity();
+		String encodedPassword = encoder.encode(dto.getPassword());
 		BeanUtils.copyProperties(dto, entity);
 		entity.setCreatedBy(dto.getUserId());
+		entity.setPassword(encodedPassword);
 		boolean saved = repo.save(entity);
-		
-//		boolean sent = this.sendMail(dto.getEmail());;
+
+		boolean sent = this.sendMail(dto.getEmail(), "registration completed", "thanks for registering");
 		log.info("data saved : " + saved);
-//		log.info("Email sent -:" + sent);
+		log.info("Email sent -:" + sent);
 		return Collections.emptySet();
 	}
 
 	@Override
-	public List<DTOClass> uniqueCheck() {
+	public List<ProjectDTO> uniqueCheck() {
 
-		List<EntityClass> entities = repo.uniqueCheck();
+		List<ProjectEntity> entities = repo.uniqueCheck();
 
-		List<DTOClass> dtos = new ArrayList<DTOClass>();
+		List<ProjectDTO> dtos = new ArrayList<ProjectDTO>();
 
-		for (EntityClass entity : entities) {
+		for (ProjectEntity entity : entities) {
 
-			DTOClass dto = new DTOClass();
+			ProjectDTO dto = new ProjectDTO();
 			BeanUtils.copyProperties(entity, dto);
 
 			dtos.add(dto);
@@ -83,62 +94,160 @@ public class ProjectServiceImp implements ProjectService {
 	}
 
 	@Override
-	public boolean sendMail(String to) {
-//		String portNumber="587";
-//		String hostName="smtp.gmail.com";
-//		String fromEmail="yasminkazi07@outlook.com";
-//		String password="8549823719";
-//		
-//		Properties prop=System.getProperties();
-//		log.info("properties"+prop);
-//		prop.put("mail.smtp.host", hostName);
-//		prop.put("mail.smtp.port", portNumber);
-//		prop.put("mail.smtp.sttartls.enable", true);
-//		prop.put("mail.debug", true);
-//		prop.put("mail.smtp.auth", true);
-//		prop.put("mail.transport.protocal", "smtp");
-//		
-//		
-//		Session session = Session.getInstance(prop, new Authenticator() {
-//		    @Override
-//		    protected PasswordAuthentication getPasswordAuthentication() {
-//		        return new PasswordAuthentication(fromEmail, password);
-//		    }
-//		});
-//		
-//		MimeMessage message= new MimeMessage(session);
-//		try {
-//			message.setFrom(new InternetAddress(fromEmail));
-//			message.setSubject("registration completed");
-//			message.setText("thanks for registering!!!..");
-//			
-//			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-//			Transport.send(message);
-//			log.info("mail sent successfully");
-//			
-//		}
-//		
-//		catch(MessagingException e) {
-//			e.printStackTrace();
-//		}
-		return true;
+	public boolean sendMail(String to, String subject, String text) {
+		String portNumber = "587";
+		String hostName = "smtp.office365.com";
+		String fromEmail = "yasmin91912@outlook.com";
+		String password = "yasmin@12";
+
+		Properties prop = System.getProperties();
+		log.info("properties" + prop);
+		prop.put("mail.smtp.host", hostName);
+		prop.put("mail.smtp.port", portNumber);
+		prop.put("mail.smtp.starttls.enable", true);
+		prop.put("mail.debug", true);
+		prop.put("mail.smtp.auth", true);
+		prop.put("mail.transport.protocal", "smtp");
+
+		Session session = Session.getInstance(prop, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(fromEmail, password);
+			}
+		});
+
+		MimeMessage message = new MimeMessage(session);
+		try {
+			message.setFrom(new InternetAddress(fromEmail));
+			message.setSubject(subject);
+
+			message.setText(text);
+
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			Transport.send(message);
+			log.info("mail sent successfully");
+			return true;
+
+		}
+
+		catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	@Override
-	public List<DTOClass> findByUserIdAndPassword(String userId, String password) {
+	public String SignIn(String userId, String password) {
 		log.info("running findByUserIdAndPassword........ ");
-		List<EntityClass> entity=this.repo.findByUserIdAndPassword(userId, password);
-		List<DTOClass> list=new ArrayList<DTOClass>();
-		for (EntityClass entityClass : entity) {
-			DTOClass dto=new DTOClass();
-			BeanUtils.copyProperties(entityClass, dto);
-			list.add(dto);
+		ProjectEntity entity = this.repo.findByUserIdAndPassword(userId);
+
+		if (entity != null) {
+                 
+			if (entity.getLoginCount() >= 3) {
+				return "account locked reset password";
+			}
+
+			boolean passwordMatch = encoder.matches(password, entity.getPassword());
+
+			if (passwordMatch == true) {
+				return "";
+			} else {
+				Integer count = entity.getLoginCount();
+				count++;
+				entity.setLoginCount(count);
+				repo.updateEntity(entity);
+				return "user not found, invalid userName or password";
+			}
+		} else {
+			return "user not found, invalid userName or password";
+		}
+	}
+
+	@Override
+	public boolean forgotPassword(String email) {
+
+		List<ProjectEntity> entity = this.repo.uniqueCheck();
+
+		for (ProjectEntity projectEntity : entity) {
+
+			if (projectEntity.getEmail().equalsIgnoreCase(email)) {
+				log.info(""+entity);
+
+				String passwordGenerated = randomPassword();
+				log.info("random password generated---------------"+passwordGenerated);
+
+				boolean sentMail = this.sendMail(email, "new random password", passwordGenerated);
+				log.info("new password" + sentMail);
+				
+				String encoded = encoder.encode(passwordGenerated);
+
+				projectEntity.setPassword(encoded);
+				projectEntity.setResetPassword(true);
+				projectEntity.setUpdatedBy("SYSTEM");
+				projectEntity.setUpdatedDate(LocalDateTime.now());
+				projectEntity.setLoginCount(0);
+
+				boolean updated = repo.updateEntity(projectEntity);
+				log.info("password updated in database ?? " + updated);
+
+				return true;
+			}
+
+		}
+		log.info("email not found");
+		return false;
+	}
+
+	public static String randomPassword() {
+		PasswordGenerator randomPassword = new PasswordGenerator();
+		CharacterRule LCR = new CharacterRule(EnglishCharacterData.LowerCase);
+		LCR.setNumberOfCharacters(2);
+
+		CharacterRule UCR = new CharacterRule(EnglishCharacterData.UpperCase);
+		UCR.setNumberOfCharacters(2);
+
+		CharacterRule DR = new CharacterRule(EnglishCharacterData.Digit);
+		DR.setNumberOfCharacters(2);
+
+		
+		String password = randomPassword.generatePassword(12, LCR, DR, UCR);
+
+		return password;
+	}
+
+	@Override
+	public boolean updateEntity(ProjectDTO dto) {
+		log.info("running UpdateEntity in ProjectServiceImp.....");
+		log.info("updated password by user in ProjectServiceImpl........." + dto.getPassword());
+
+		String encodedPass = encoder.encode(dto.getPassword());
+
+		ProjectEntity entity = new ProjectEntity();
+		BeanUtils.copyProperties(dto, entity);
+
+		entity.setUpdatedBy(dto.getUserId());
+		entity.setResetPassword(false);
+		entity.setPassword(encodedPass);
+		entity.setCreatedBy(dto.getUserId());
+		entity.setUpdatedDate(LocalDateTime.now());
+
+		repo.updateEntity(entity);
+		return true;
+
+	}
+
+	@Override
+	public ProjectDTO findByUserId(String userId) {
+		log.info("running findByUserid in ProjectServiceImp......................");
+
+		ProjectEntity entity = repo.findByUserIdAndPassword(userId);
+		ProjectDTO dto = new ProjectDTO();
+		if (entity != null) {
+			BeanUtils.copyProperties(entity, dto);
+			return dto;
 			
 		}
-		
-		log.info("size of dtos "+list.size());
-		log.info("size of entities "+entity.size());
-		return list;
+		return null;
 	}
 
 }

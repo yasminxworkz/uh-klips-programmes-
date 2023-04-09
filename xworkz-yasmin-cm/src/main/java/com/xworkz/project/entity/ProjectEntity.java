@@ -17,9 +17,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "userDetails")
-@NamedQuery(name = "fetchAll",query ="select entity from EntityClass entity" )
-@NamedQuery(name = "findByuserIdAndPassword", query = "select entity from EntityClass entity where entity.userId=:by and entity.password=:p")
-public class EntityClass {
+@NamedQuery(name = "fetchAll",query ="select entity from ProjectEntity entity" )
+@NamedQuery(name = "findByuserIdAndPassword", query = "select entity from ProjectEntity entity where entity.userId=:by")
+public class ProjectEntity {
    @Id
    @Column(name = "p_signUpId")
 	private int signUpId;
@@ -47,4 +47,10 @@ public class EntityClass {
    
    @Column(name = "p_updatedDate")
 	private LocalDateTime updatedDate;
+   
+   @Column(name = "login_count")
+   private Integer loginCount=0;
+   
+   @Column(name = "resetPassword")
+    private  Boolean  resetPassword=false;
 }

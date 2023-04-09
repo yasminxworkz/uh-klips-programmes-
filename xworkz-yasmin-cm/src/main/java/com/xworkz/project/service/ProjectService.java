@@ -6,19 +6,26 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 
-import com.xworkz.project.dto.DTOClass;
+
+import com.xworkz.project.dto.ProjectDTO;
 
 
 public interface ProjectService {
 
-	Set<ConstraintViolation<DTOClass>> validateAndSave(DTOClass dto);
+	Set<ConstraintViolation<ProjectDTO>> validateAndSave(ProjectDTO dto);
 	
-	List<DTOClass> uniqueCheck();
+	List<ProjectDTO> uniqueCheck();
 	
-	boolean sendMail(String to);
+	boolean sendMail(String to, String subject,String text);
 	
-	 default List<DTOClass> findByUserIdAndPassword(String userId,String password){
-	    	return null;
-	    }
+	String SignIn(String userId,String password);
+	
+	boolean forgotPassword(String email);
+	
+	boolean updateEntity(ProjectDTO dto);
+	
+	ProjectDTO findByUserId(String userId);
+	
+    
 
 }

@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 
 </head>
-
+<body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
   <div class="container-fluid">
@@ -40,7 +40,7 @@
 </nav>
 
 
-    <h1 style="color: blue;">SignUp page</h1>
+    <h1 style="color: blue;">SignIn page</h1>
     
     <br>
     <br>
@@ -48,32 +48,41 @@
       <h1 style="color: red">${message}</h1>
  
     
-    <form action="signUp" method="get">
-  UserId <input type="text" class="form-control form-control-lg" placeholder="userId" name="userId"> <br>
+    <form action="SignIn" method="get">
+  UserId <input type="text" class="form-control form-control-lg" placeholder="userId" id="Id" name="userId" onchange="onUser()"> <br>
     Password      <input type="text" class="form-control form-control-lg" placeholder="password" name="password"><br>
           <input type="submit" value="signUp" >
     
     </form>
-   
-     <c:forEach items="${list}" var="n">
-     
-     </c:forEach>
-    
-    
-    
-  
-    
-    
-    
+    <a style="color: blue" href="forgotPassword.jsp">forgotPassword?</a>
+     <script >
 
-       
- 
-  
-  
-  
-       
-      
-       
+function onUser() {
+	console.log("running onUser")
+	var userInput=document.getElementById('Id');
+	var userValue=userInput.value;
+	console.log(userValue);
+	if(userValue!=null && userValue!="" && userValue.length>3 && userValue.length<30)
+		{
+		console.log('valid user');
+		var agrement=document.getElementById('agreement');
+		if(agrement.checked){
+			document.getElementById('submitId').disabled=false;
+		}
+		document.getElementById('nameError').innerHTML='';
+		}
+	
+	else{
+		console.log('invalid user');
+		document.getElementById('submitId').disabled='disabled';
+	
+	document.getElementById('nameError').innerHTML='Invalid userId, please enter min 3 and max 30';
+	}
+	
+	
+}
+
+</script >
 
 
 </body>

@@ -10,19 +10,16 @@
 <title>Insert title here</title>
 <style >
 
-.center-form{
+.container{
 
-justify-content: center;
 
-display: flex;
 
-margin: 40px 50px;
+padding: 34px 19px;
+margin: 14px 19px;
+border-radius:23px;
+width:233px;
 
-border: 3px solid blue;
 
-padding: 30px;
-
-background-color: rgb(208, 205, 248);
 
 }
 </style>
@@ -57,7 +54,7 @@ background-color: rgb(208, 205, 248);
 </nav>
 
 
-    <h1 style="color:red">${message}</h1>
+    <h1 style="color:red">${successMsg}</h1>
  
     
     <br>
@@ -65,18 +62,16 @@ background-color: rgb(208, 205, 248);
     
       
  
- <div class="center-form">
+ <div class="container">
     
-    <form action="signUp" method="get" class="altering">
+    <form action="SignIn" method="get" class="altering">
  
     
     </form>
    
    </div>
    
-     <c:forEach items="${list}" var="n">
-     <h1>${n.userId}</h1>
-     </c:forEach>
+   
     
     
     

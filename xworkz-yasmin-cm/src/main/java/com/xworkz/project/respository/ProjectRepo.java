@@ -2,18 +2,16 @@ package com.xworkz.project.respository;
 
 import java.util.List;
 
-
-
-import com.xworkz.project.entity.EntityClass;
+import com.xworkz.project.entity.ProjectEntity;
 
 
 public interface ProjectRepo {
 
-	boolean save(EntityClass entity);
+	boolean save(ProjectEntity entity);
 	
-	List<EntityClass> uniqueCheck();
+	List<ProjectEntity> uniqueCheck();
 	
-	default List<EntityClass> findByUserIdAndPassword(String userId,String password){
-		return null;
-	}
+	ProjectEntity findByUserIdAndPassword(String userId);
+
+       boolean updateEntity(ProjectEntity entity);
 }
