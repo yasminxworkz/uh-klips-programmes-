@@ -22,10 +22,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="save.jsp">register</a>
+          <a style="color:white" class="btn btn-outline-warning" aria-current="page" href="save.jsp">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="SignIn.jsp">SignIn</a>
+          <a style="color:white" class="btn btn-outline-warning" aria-current="page" href="SignIn.jsp">SignIn</a>
         </li>
       </ul>
       

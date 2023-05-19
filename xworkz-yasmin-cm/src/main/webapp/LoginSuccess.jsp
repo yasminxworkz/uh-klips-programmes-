@@ -9,65 +9,75 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <style >
-
 .container{
-
-
-
-padding: 34px 19px;
-margin: 14px 19px;
-border-radius:23px;
-width:233px;
-
-
-
+  width: 560px;
 }
+
 </style>
 </head>
-
+<body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
   <div class="container-fluid">
  <a class="navbar-brand" href="#">
       <img src="https://www.x-workz.in/static/media/Logo.cf195593dc1b3f921369.png" alt="" width="80" height="30">
+   
+   </div>
+   
     </a>    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="save.jsp">register</a>
+   <li class="nav-item">
+          <a class="navbar-brand" aria-current="page" >
+          <span style="color: yellow;">${successMsg}</span> 
+     
+		
+          </a>
+        </li>
+         <li class="nav-item">
+          <a class="navbar-brand" aria-current="page" >
+          
+      <span> <img src="download?fileName=${dtoPic}" height="70" width="80"> </span>
+		
+          </a>
         </li>
         
+        
+        
          <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
+       
+          <a  style="color:white" class="btn btn-outline-warning" aria-current="page" href="index.jsp">Home</a>
         </li>
         
       </ul>
       
       
-      
-      
-     
+   
     </div>
   </div>
 </nav>
 
 
     <h1 style="color:red">${successMsg}</h1>
+    <h1 style="color: green">${UpdatesuccessMsg}</h1>
+     <h1 style="color: green;">${message}</h1>
  
     
     <br>
     <br>
     
+   
       
  
- <div class="container">
-    
-    <form action="SignIn" method="get" class="altering">
  
-    
-    </form>
+   
+   <div class="container">
+   <a href="update?userId=${userId}">update profile</a><br>
+   <a href="addTechnologies.jsp">add technologies</a><br>
+   <a href="viewTechnologies.jsp">view technologies</a><br>
+   <a href="techNameSearch.jsp">search by technologies</a><br>
    
    </div>
    

@@ -26,6 +26,13 @@ public interface ProjectService {
 	
 	ProjectDTO findByUserId(String userId);
 	
+	 ProjectDTO findByEmail(String email);
+	
+	ProjectDTO findBysignUpId(int signUpId);
+	
+	Set<ConstraintViolation<ProjectDTO>> updateProfile(ProjectDTO dto);
+	
+   
     
 
 }

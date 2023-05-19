@@ -12,6 +12,12 @@ public interface ProjectRepo {
 	List<ProjectEntity> uniqueCheck();
 	
 	ProjectEntity findByUserIdAndPassword(String userId);
+	
+	ProjectEntity findByEmail(String email);
 
        boolean updateEntity(ProjectEntity entity);
+       
+       public ProjectEntity findBysignUpId(int signUpId);
+       
+//       public void expireOTP();
 }

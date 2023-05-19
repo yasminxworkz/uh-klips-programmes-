@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
@@ -46,6 +47,12 @@ public class ConfigurationClass {
 		PasswordEncoder  encoder=new BCryptPasswordEncoder();
 		return encoder;
 		
+	}
+	
+	@Bean
+	public MultipartResolver multipartResolver() {  
+		log.info("registering multipartResolver");
+		return new StandardServletMultipartResolver();
 	}
 	
 	

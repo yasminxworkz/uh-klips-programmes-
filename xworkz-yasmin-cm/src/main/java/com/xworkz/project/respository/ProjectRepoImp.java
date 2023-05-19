@@ -1,5 +1,6 @@
 package com.xworkz.project.respository;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -67,6 +68,27 @@ public class ProjectRepoImp implements ProjectRepo {
 		}
 
 	}
+	
+	@Override
+	public ProjectEntity findByEmail(String email) {
+		EntityManager manager=this.factory.createEntityManager();
+		try {
+			Query query=manager.createNamedQuery("findByEmail");
+			query.setParameter("em", email);
+			Object obj=query.getSingleResult();
+			ProjectEntity ent=(ProjectEntity)obj;
+			return ent;
+		}
+		catch (Exception e) {
+			log.info("no data found for-------"+email);
+			return null;
+		}
+		finally {
+			manager.close();
+		}
+	}
+	
+	
 
 	@Override
 	public boolean updateEntity(ProjectEntity entity) {
@@ -81,4 +103,30 @@ public class ProjectRepoImp implements ProjectRepo {
 			manager.close();
 		}
 	}
+
+	@Override
+	public ProjectEntity findBysignUpId(int signUpId) {
+		log.info(" running findBysignUpId in repository.....");
+		EntityManager manager=factory.createEntityManager();
+		ProjectEntity entity=manager.find(ProjectEntity.class, signUpId);
+		manager.close();
+		
+		return entity;
+	}
+
+	
+
+//	@Override
+//	public void expireOTP() {
+//	EntityManager manager=factory.createEntityManager();
+//	EntityTransaction transaction=manager.getTransaction();
+//	transaction.begin();
+//	Query query=manager.createNamedQuery("expireOTP");
+//	query.setParameter("boolean", true);
+//	query.setParameter("currentTime", LocalTime.now());
+//	query.executeUpdate();
+//	transaction.commit();
+//	manager.close();
+//		
+//	}
 }

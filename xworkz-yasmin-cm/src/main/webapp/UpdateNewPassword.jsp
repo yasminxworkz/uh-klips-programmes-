@@ -8,7 +8,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style >
+ .container{
+ width: 560px;
+ }
 
+
+</style>
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -41,14 +47,17 @@
       
     <h3 style="color: blue;">${userId}</h3>
     
+    <div class="container">
      <form action="updatePassword?userId=${userId}" method="post">
   new password <input type="password" class="form-control form-control-lg" placeholder="userId" id="secure" name="password" onchange="onPassword()"> <br>
  
    ConfirmPassword<input class="form-control form-control-lg" type="password"  id="pass"onchange="onPassword()" value="${dto.password}" /> 
+		 <input type="checkbox" onclick="showPassword()"> show Password
 		<span id="passwordError" style="color: red"></span><br>
           <input type="submit" value="update" id="submitId" disabled="disabled" class="btn-btn-dark btn-lg"/>
    
     </form>
+    </div>
    <h2 style="color:blue">please set your new password</h2>
    <br>
    <span style="color: red" id="passwordError"></span>
@@ -84,6 +93,16 @@
 			}
 
 		}
+     
+     function showPassword() {
+         var temp = document.getElementById("pass");
+         if (temp.type === "password") {
+             temp.type = "text";
+         }
+         else {
+             temp.type = "password";
+         }
+     }
 </script >
     
 

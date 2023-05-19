@@ -16,7 +16,12 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 
+<style >
+.container{
+  width: 560px;
+}
 
+</style>
 
 </head>
 <body>
@@ -35,7 +40,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
+					<li class="nav-item"><a style="color:white" class="btn btn-outline-warning"
 						aria-current="page" href="index.jsp">Home</a></li>
 						
 						
@@ -60,8 +65,8 @@
 	<h3 style="color: red">${uniqueError}</h3>
 	<h3 style="color: red">${confirmError}</h3>
 
-
-	<form action="save" method="post"  class="bg-success container pt-9 border border-5 border border-dark">
+<div class="container">
+	<form action="save" method="post"  class=" container pt-9 border border-5 border border-dark">
 
 
 		userId<input class="form-control form-control-lg " type="text" id="Id"
@@ -79,10 +84,10 @@
 			class="form-control form-control-lg" type="password" name="password"
 			id="secure" onchange="onPassword()" value="${dto.password}" />
 
-		ConfirmPassword<input class="form-control form-control-lg" type="password" name="confirmPassword" id="pass"onchange="onPassword()" value="${dto.password}" /> 
-		<span id="passwordError" style="color: red"></span><br>
-			
-			
+		ConfirmPassword<input class="form-control form-control-lg" type="password" name="confirmPassword" id="pass"onchange="onPassword()"  value="${dto.password}" /> 
+		
+    <span id="passwordError" style="color: red"></span><br>
+		 <input type="checkbox" onclick="showPassword()"> show Password	
 			
 			 <input
 			type="checkbox" id="agreement" onclick="onAgreement()">Accept
@@ -92,7 +97,7 @@
 	 		</form>
 		
 
-
+</div>
 
 
 	<script>
@@ -274,6 +279,16 @@
 			
 		}
 		
+		
+		function showPassword() {
+		    var temp = document.getElementById("pass");
+		    if (temp.type === "password") {
+		        temp.type = "text";
+		    }
+		    else {
+		        temp.type = "password";
+		    }
+		}
 		
 	</script>
 </body>

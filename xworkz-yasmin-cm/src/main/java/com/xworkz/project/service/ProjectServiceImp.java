@@ -1,13 +1,17 @@
 package com.xworkz.project.service;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.enterprise.inject.spi.Bean;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -24,6 +28,8 @@ import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -73,6 +79,8 @@ public class ProjectServiceImp implements ProjectService {
 		log.info("Email sent -:" + sent);
 		return Collections.emptySet();
 	}
+	
+	
 
 	@Override
 	public List<ProjectDTO> uniqueCheck() {
@@ -87,6 +95,7 @@ public class ProjectServiceImp implements ProjectService {
 			BeanUtils.copyProperties(entity, dto);
 
 			dtos.add(dto);
+			
 
 		}
 
@@ -142,10 +151,14 @@ public class ProjectServiceImp implements ProjectService {
 		ProjectEntity entity = this.repo.findByUserIdAndPassword(userId);
 
 		if (entity != null) {
+			
+			
                  
 			if (entity.getLoginCount() >= 3) {
 				return "account locked reset password";
 			}
+			
+			
 
 			boolean passwordMatch = encoder.matches(password, entity.getPassword());
 
@@ -186,7 +199,7 @@ public class ProjectServiceImp implements ProjectService {
 				projectEntity.setUpdatedBy("SYSTEM");
 				projectEntity.setUpdatedDate(LocalDateTime.now());
 				projectEntity.setLoginCount(0);
-
+				//projectEntity.setOtpRequestedTime(LocalTime.now().plusSeconds(120));
 				boolean updated = repo.updateEntity(projectEntity);
 				log.info("password updated in database ?? " + updated);
 
@@ -249,5 +262,60 @@ public class ProjectServiceImp implements ProjectService {
 		}
 		return null;
 	}
+	
+	@Override
+	public ProjectDTO findByEmail(String email) {
+		log.info("findByEmail"+email);
+		ProjectEntity entity = this.repo.findByEmail(email);
+		if(entity!=null) {
+			ProjectDTO dto = new ProjectDTO();
+			BeanUtils.copyProperties(entity, dto);
+			return dto;
+		}
+		return null;
+	}
+	
+	
+	
+	@Override
+	public Set<ConstraintViolation<ProjectDTO>> updateProfile(ProjectDTO dto) {
+		ProjectEntity entity = new ProjectEntity();
+		BeanUtils.copyProperties(dto, entity);
+//		entity.setCreatedBy(dto.getUserId());
+//		entity.setPassword(encoder.encode(dto.getPassword()));
+        entity.setUpdatedBy(dto.getUserId());
+        entity.setUpdatedDate(LocalDateTime.now());
+		log.info("password" + dto);
+		boolean update = this.repo.updateEntity(entity);
+		if (update) {
+			// sendMail(dto.getEmail());
+			boolean sent = sendMail(entity.getEmail(), "Registraion success ", "thanks for registering");
+			System.out.println("mail  sent" + sent);
+		}
+		log.info("Entity data is update :" + update);
+		return Collections.emptySet();
+	}
+
+	@Override
+	public ProjectDTO findBysignUpId(int signUpId) {
+      if(signUpId>0) {
+			
+			ProjectEntity entity=repo.findBysignUpId(signUpId);
+			if(entity!=null) {
+				log.info("entitity is found for signUpId "+signUpId);
+				ProjectDTO dto=new ProjectDTO();
+				BeanUtils.copyProperties(entity, dto);
+				return dto;
+			}
+			
+		}
+		return null;
+	}
+
+	
+	
+
+	
+
 
 }

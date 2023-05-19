@@ -17,10 +17,9 @@
 <title>Insert title here</title>
 
 <style >
- .container{
- width: 560px;
- }
-
+.container{
+  width: 560px;
+}
 
 </style>
 
@@ -43,7 +42,7 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="index.jsp">Home</a></li>
-						
+						 
 						
 						
 
@@ -53,20 +52,37 @@
 			</div>
 		</div>
 	</nav>
+	<h3 style="color: red">
+		<c:forEach items="${violations}" var="v">
+			<p>${v.message}</p>
+		</c:forEach>
+
+	</h3>
 	<div class="container">
-<form action="forgot" method="post">
-      email<input class="form-control form-control-lg" type="email" name="email" id="mail"  /> 
-      <span id="mailError" style="color: red"></span><br>
-			
-		<input type="submit" value="reset">	
-			
+<form action="add" method="post">
+userId<input class="form-control form-control-lg " name="userId" type="text" id="Id"  onchange="onUser()" value="${dto.userId}">
+<span id="idError"></span><br>
+TechName<input class="form-control form-control-lg " name="techName" type="text" id="tech"  onchange="onTechName()">
+<span id="techError"></span><br>
+Language<input class="form-control form-control-lg " name="language" type="text" id="lang"  onchange="onLanguage()" >
+<span id="langError"></span><br>
+owner<input class="form-control form-control-lg " name="owner" type="text" id="own"  onchange="onOwner()" >
+<span id="ownerError"></span><br>
+SupportFrom<input class="form-control form-control-lg " name="supportFrom" type="text" id="from"  onchange="onSupportFrom()">
+<span id="supportError"></span><br>
+SupportTo<input class="form-control form-control-lg " name="supportTo" type="text" id="to"  onchange="onSupportTo()">
+<span id="toError"></span><br>
+License<input class="form-control form-control-lg " name="license" type="text" id="lic"  onchange="onLicense()" >
+<span id="licenseError"></span><br>
+openSource<input name="openSource" type="radio" value="yes">yes
+<input name="openSource" type="radio" value="no">no
+OSType<input class="form-control form-control-lg " name="OSType" type="text" id="os"  onchange="onOSType()">
+<span id="osError"></span><br>
+<input type="submit"  value="add">
+
+
+
 </form>
 </div>
-
-<a href="SignIn.jsp">${resetMsg}</a>
-<h3>${resetError}</h3>
-
-	
-			
 </body>
 </html>

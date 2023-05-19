@@ -1,5 +1,7 @@
 package com.xworkz.project.dto;
 
+import java.time.LocalTime;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -37,5 +39,11 @@ public class ProjectDTO {
 	private Integer loginCount = 0;
 
 	private Boolean resetPassword = false;
+	
+	private String profilepic;
+	
+//	private LocalTime otpRequestedTime;
+//	
+//	private Boolean otpExpired;
 
 }
