@@ -225,18 +225,18 @@ public class ProjectController {
 	}
 	
 	
-//	@GetMapping("/download")
-//	public void onDownload(HttpServletResponse response, @RequestParam String fileName, ProjectDTO dto)
-//			throws IOException {
-//		log.info("onDownload "+fileName);
-//		Path path = Paths.get("D:\\highway\\" + dto.getProfilepic());
-//		path.toFile();
-//		response.setContentType("image/jpeg");
-//		File file = new File("D:\\Project_image_file\\" + fileName);
-//		InputStream in = new BufferedInputStream(new FileInputStream(file));
-//		ServletOutputStream out = response.getOutputStream();
-//		IOUtils.copy(in, out);
-//		response.flushBuffer();
+	@GetMapping("/download")
+	public void onDownload(HttpServletResponse response, @RequestParam String fileName, ProjectDTO dto)
+			throws IOException {
+	log.info("onDownload "+fileName);
+		Path path = Paths.get("D:\\highway\\" + dto.getProfilepic());
+		path.toFile();
+		response.setContentType("image/jpeg");
+	   File file = new File("D:\\Project_image_file\\" + fileName);
+		InputStream in = new BufferedInputStream(new FileInputStream(file));
+	   ServletOutputStream out = response.getOutputStream();
+		IOUtils.copy(in, out);
+	   response.flushBuffer();
 	
-//}
+}
 }
