@@ -1,17 +1,12 @@
 package com.xworkz.project.service;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
-
-import javax.enterprise.inject.spi.Bean;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -53,6 +48,15 @@ public class ProjectServiceImp implements ProjectService {
 	public ProjectServiceImp() {
 		log.info("created " + getClass().getSimpleName());
 	}
+	
+	@Async
+	@Scheduled(fixedDelay = 1000, initialDelay = 1000)
+	@Override
+	public void expireOTP() {
+		repo.expireOTP();
+		
+	}
+
 
 	@Override
 	public Set<ConstraintViolation<ProjectDTO>> validateAndSave(ProjectDTO dto) {
@@ -68,10 +72,13 @@ public class ProjectServiceImp implements ProjectService {
 
 		log.info("no violations present,data can be saved");
 		ProjectEntity entity = new ProjectEntity();
-		String encodedPassword = encoder.encode(dto.getPassword());
+		
 		BeanUtils.copyProperties(dto, entity);
 		entity.setCreatedBy(dto.getUserId());
+		String encodedPassword = encoder.encode(dto.getPassword());
 		entity.setPassword(encodedPassword);
+		entity.setOtpExpired(false);
+		
 		boolean saved = repo.save(entity);
 
 		boolean sent = this.sendMail(dto.getEmail(), "registration completed", "thanks for registering");
@@ -147,8 +154,8 @@ public class ProjectServiceImp implements ProjectService {
 
 	@Override
 	public String SignIn(String userId, String password) {
-		log.info("running findByUserIdAndPassword........ ");
-		ProjectEntity entity = this.repo.findByUserIdAndPassword(userId);
+		log.info("running findByUserId........ ");
+		ProjectEntity entity = this.repo.findByUserId(userId);
 
 		if (entity != null) {
 			
@@ -158,11 +165,17 @@ public class ProjectServiceImp implements ProjectService {
 				return "account locked reset password";
 			}
 			
+			if(entity.getOtpExpired()==true) {
+				return "OTP expired please resend OTP....";
+			}
 			
 
 			boolean passwordMatch = encoder.matches(password, entity.getPassword());
+			log.info("password match ?? "+passwordMatch);
 
 			if (passwordMatch == true) {
+				entity.setLoginCount(0);
+				repo.updateEntity(entity);
 				return "";
 			} else {
 				Integer count = entity.getLoginCount();
@@ -199,7 +212,8 @@ public class ProjectServiceImp implements ProjectService {
 				projectEntity.setUpdatedBy("SYSTEM");
 				projectEntity.setUpdatedDate(LocalDateTime.now());
 				projectEntity.setLoginCount(0);
-				//projectEntity.setOtpRequestedTime(LocalTime.now().plusSeconds(120));
+				projectEntity.setOtpRequestedTime(LocalTime.now().plusSeconds(60));
+				projectEntity.setOtpExpired(false);
 				boolean updated = repo.updateEntity(projectEntity);
 				log.info("password updated in database ?? " + updated);
 
@@ -243,6 +257,10 @@ public class ProjectServiceImp implements ProjectService {
 		entity.setPassword(encodedPass);
 		entity.setCreatedBy(dto.getUserId());
 		entity.setUpdatedDate(LocalDateTime.now());
+		entity.setOtpExpired(false);
+		entity.setOtpRequestedTime(null);
+		
+		
 
 		repo.updateEntity(entity);
 		return true;
@@ -253,7 +271,7 @@ public class ProjectServiceImp implements ProjectService {
 	public ProjectDTO findByUserId(String userId) {
 		log.info("running findByUserid in ProjectServiceImp......................");
 
-		ProjectEntity entity = repo.findByUserIdAndPassword(userId);
+		ProjectEntity entity = repo.findByUserId(userId);
 		ProjectDTO dto = new ProjectDTO();
 		if (entity != null) {
 			BeanUtils.copyProperties(entity, dto);
@@ -312,6 +330,7 @@ public class ProjectServiceImp implements ProjectService {
 		return null;
 	}
 
+	
 	
 	
 

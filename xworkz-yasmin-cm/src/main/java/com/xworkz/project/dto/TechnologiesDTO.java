@@ -2,6 +2,7 @@ package com.xworkz.project.dto;
 
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
@@ -10,9 +11,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class TechnologiesDTO {
-
 	
 	private String userId;
+	
+	private int id;
+	
 	@NotEmpty(message = "techName should not be empty")
     @Size(min = 3, max = 20)
 	private String techName;
@@ -28,11 +31,13 @@ public class TechnologiesDTO {
 	@NotEmpty(message = "supportTo should not be empty")
     @Size(min = 3, max = 20)
 	private String supportTo;
-	@NotEmpty(message = "license should not be empty")
+	@NotNull(message = "license should not be empty")
     @Size(min = 3, max = 20)
 	private String license;
 	private boolean openSource;
 	@NotEmpty(message = "OSType should not be empty")
     @Size(min = 3, max = 20)
 	private String OSType;
+	
+	private ProjectDTO projectDTO;
 }

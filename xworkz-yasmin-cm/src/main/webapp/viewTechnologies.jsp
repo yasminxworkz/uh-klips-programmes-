@@ -28,15 +28,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+       
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="save.jsp">register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="SignIn.jsp">SignIn</a>
+          <a class="nav-link active" aria-current="page" href="SignIn.jsp">logout</a>
         </li>
         
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="LoginSuccess.jsp">update</a>
+          <a class="nav-link active" aria-current="page" href="LoginSuccess.jsp">home</a>
         </li>
       </ul>
       
@@ -48,9 +46,12 @@
   </div>
 </nav>
 <h1 style="color: red">${message}</h1>
-<form action="findAll" method="get">
-<input type="submit" value="view Technologies">
+
+<form action="searchTechnologies?userId=${userId}" method="post">
+search<input type="text" name="param" placeholder="search for tech">
+ <input type="submit" >
 </form>
+
 <div>
 <table class="table table-bordered">
 <tr>
@@ -64,7 +65,7 @@
 <th class="table-dark">openSource</th>
 <th class="table-dark">OSType</th>
 
-<c:forEach items="${dto}" var="n">
+<c:forEach items="${list}" var="n">
 <tr>
 <td>${n.userId}</td>
 <td>${n.techName}</td>

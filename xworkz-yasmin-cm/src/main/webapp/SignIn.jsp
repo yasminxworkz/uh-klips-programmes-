@@ -59,7 +59,7 @@
   UserId <input type="text" class="form-control form-control-lg" placeholder="userId" id="Id" name="userId" onchange="onUser()"> <br>
     Password      <input type="password" class="form-control form-control-lg" placeholder="password" name="password" id="pass"><br>
            <input type="checkbox" onclick="showPassword()"> show Password
-          <input type="submit" value="signUp" >
+          <input type="submit" value="signIn" >
    
     </form>
     <a style="color: blue" href="forgotPassword.jsp">forgotPassword?</a>

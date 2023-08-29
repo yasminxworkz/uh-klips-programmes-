@@ -50,11 +50,15 @@ public class TechnologiesRepoImp implements TechnologiesRepo {
 	}
 
 	@Override
-	public List<TechnologiesEntity> findByTechnology(String techName) {
+	public List<TechnologiesEntity> findTechnology(String param,int id) {
+		System.out.println("running findTechnology in TechnologiesRepoImp.......................");
 		EntityManager manager=factory.createEntityManager();
 		try {
-			Query query=manager.createNamedQuery("findByTechnology");
-			query.setParameter("by", techName);
+			System.out.println("===============*********=============  "  +id+"  "+param);
+
+			Query query=manager.createNamedQuery("findTechnology");
+			query.setParameter("param", param);
+			query.setParameter("id", id);
 			List<TechnologiesEntity> list=query.getResultList();
 			log.info("total list found "+list.size());
 			return list;

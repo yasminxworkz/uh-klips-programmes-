@@ -12,7 +12,7 @@ public interface TechnologiesRepo {
 	
 	List<TechnologiesEntity> findAll();
 	
-	default List<TechnologiesEntity> findByTechnology(String techName){
-		return null;
-	}
+	 List<TechnologiesEntity> findTechnology(String param,int id);
+		
+	
 }

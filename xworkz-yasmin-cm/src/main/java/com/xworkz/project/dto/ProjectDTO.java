@@ -1,12 +1,15 @@
 package com.xworkz.project.dto;
 
 import java.time.LocalTime;
+import java.util.List;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.xworkz.project.entity.TechnologiesEntity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProjectDTO {
 
-	private int signUpId;
+	private int id;
 
 	@NotNull
 	@Size(min = 4, max = 50, message = "the length should be greater than 4 and less than 50")
@@ -42,8 +45,10 @@ public class ProjectDTO {
 	
 	private String profilepic;
 	
-//	private LocalTime otpRequestedTime;
+	private LocalTime otpRequestedTime;
 //	
-//	private Boolean otpExpired;
+	private Boolean otpExpired;
+	
+	private List<TechnologiesEntity> technologiesEntities;
 
 }

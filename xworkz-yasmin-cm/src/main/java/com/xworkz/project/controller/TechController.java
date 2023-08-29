@@ -8,13 +8,10 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Set;
+
 
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.validation.ConstraintViolation;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xworkz.project.dto.ProjectDTO;
 import com.xworkz.project.dto.TechnologiesDTO;
+import com.xworkz.project.entity.TechnologiesEntity;
+import com.xworkz.project.service.ProjectService;
 import com.xworkz.project.service.TechnologiesService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,73 +36,40 @@ import lombok.extern.slf4j.Slf4j;
 public class TechController {
 	
 	@Autowired
-	TechnologiesService service;
+	TechnologiesService technologiesService;
+	
+	@Autowired
+	ProjectService projectService;
 	
 	public TechController() {
 		log.info("running TechController............");
 	}
 	
-	@PostMapping("/add")
-	public String onSave(TechnologiesDTO dto, Model model, HttpServletRequest request,HttpServletResponse response,ProjectDTO projectDTO) {
-	
-		log.info("running onsave in TechController......................");
-		HttpSession session=request.getSession(true);
-		session.setAttribute("userId", dto.getUserId());
-		
-		
-		Set<ConstraintViolation<TechnologiesDTO>> violations=service.validateAndSave(dto);
-		log.info("dto"+ dto);
-		model.addAttribute("message", violations);
-		
-		if(!violations.isEmpty()) {
-			System.err.println("validation failed.....................");
-			violations.forEach((cv)->{
-				System.out.println(cv.getMessage());
-			});
-			return "addTechnologies";
-			
-		}
-		
-		else {
-			log.info("validation success......... ");
-			model.addAttribute("successMsg", "Welcome " +dto.getUserId());
-			if (projectDTO.getProfilepic() != null) {
-				session.setAttribute("dtoPic", projectDTO.getProfilepic());
-			}
-			session.setAttribute("udto", dto);
-			
-		return "TechSuccess";
-		}
+	@PostMapping("/addTechnologies")
+	public String onAddTechnologies(TechnologiesDTO dto,Model model) {
+		System.out.println("========================================"+dto.getUserId());
+		technologiesService.save(dto);
+		model.addAttribute("msg", "technology added successfully");
+		return "addTechnologies";
 	}
 	
-	@GetMapping("/findAll")
-	public String findAll(Model model) {
-		List<TechnologiesDTO> list=this.service.findAll();
-		if(list!=null) {
-			model.addAttribute("dto", list);
-		}
-		
-		else {
-			model.addAttribute("message", "do not found");
-		}
+	@GetMapping("/viewTechnologies")
+	public String onViewTechnologies(String userId,Model model) {
+		ProjectDTO dto=projectService.findByUserId(userId);
+		List<TechnologiesEntity> list=dto.getTechnologiesEntities();
+		model.addAttribute("list", list);
 		return "viewTechnologies";
 	}
 	
-	@GetMapping("/findByTech")
-	public String onTechNameSearch(@RequestParam String techName,Model model) {
-		log.info("running onTechNameSearch in techController........."+techName);
-		List<TechnologiesDTO> list=this.service.findByTechnology(techName);
-		if(list!=null && !list.isEmpty() ) {
-			model.addAttribute("list", list);
-			return "techNameSearch";
-			
-		}
+	@PostMapping("/searchTechnologies")
+	public String onSearchTechnologies(String userId,String param,Model model) {
 		
-		else {
-			model.addAttribute("message", "***********data not found***********");
-			return "techNameSearch";
-		}
+		List<TechnologiesEntity> technologiesEntities= technologiesService.findTechnology(userId, param);
+		model.addAttribute("list", technologiesEntities);
+		return "viewTechnologies";
 	}
+		
+		
 	
 	@GetMapping("/down")
 	public void onDownload(HttpServletResponse response, @RequestParam String fileName, ProjectDTO dto)

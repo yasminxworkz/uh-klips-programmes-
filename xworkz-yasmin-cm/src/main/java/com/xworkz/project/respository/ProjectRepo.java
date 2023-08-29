@@ -11,7 +11,7 @@ public interface ProjectRepo {
 	
 	List<ProjectEntity> uniqueCheck();
 	
-	ProjectEntity findByUserIdAndPassword(String userId);
+	ProjectEntity findByUserId(String userId);
 	
 	ProjectEntity findByEmail(String email);
 
@@ -19,5 +19,5 @@ public interface ProjectRepo {
        
        public ProjectEntity findBysignUpId(int signUpId);
        
-//       public void expireOTP();
+       public void expireOTP();
 }

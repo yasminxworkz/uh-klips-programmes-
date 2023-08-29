@@ -51,13 +51,19 @@ public class ProjectRepoImp implements ProjectRepo {
 	}
 
 	@Override
-	public ProjectEntity findByUserIdAndPassword(String userId) {
+	public ProjectEntity findByUserId(String userId) {
+		log.info("running  findByUserId in ProjectRepoImp..................."+userId);
+
+		
 		EntityManager manager = this.factory.createEntityManager();
 		try {
-			Query query = manager.createNamedQuery("findByuserIdAndPassword");
+			log.info("running  findByUserId in ProjectRepoImp..................."+userId);
+
+			Query query = manager.createNamedQuery("findByUserId");
 			query.setParameter("by", userId);
 			Object obj = query.getSingleResult();
 			ProjectEntity ent = (ProjectEntity) obj;
+			System.out.println("tech entities found ------- "+ent.getTechnologiesEntities().size());
 			return ent;
 		} catch (Exception e) {
 			log.info("no data found for!!!!! " + userId);
@@ -116,17 +122,18 @@ public class ProjectRepoImp implements ProjectRepo {
 
 	
 
-//	@Override
-//	public void expireOTP() {
-//	EntityManager manager=factory.createEntityManager();
-//	EntityTransaction transaction=manager.getTransaction();
-//	transaction.begin();
-//	Query query=manager.createNamedQuery("expireOTP");
-//	query.setParameter("boolean", true);
-//	query.setParameter("currentTime", LocalTime.now());
-//	query.executeUpdate();
-//	transaction.commit();
-//	manager.close();
-//		
-//	}
+	@Override
+	public void expireOTP() {
+	EntityManager manager=factory.createEntityManager();
+	try{EntityTransaction transaction=manager.getTransaction();
+	transaction.begin();
+	Query query=manager.createNamedQuery("expireOTP");
+	query.setParameter("boolean", true);
+	query.setParameter("currentTime", LocalTime.now());
+	query.executeUpdate();
+	transaction.commit();}
+	finally {
+	manager.close();
+	}	
+}
 }

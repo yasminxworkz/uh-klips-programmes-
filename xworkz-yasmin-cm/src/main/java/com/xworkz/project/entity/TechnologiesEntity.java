@@ -1,5 +1,8 @@
 package com.xworkz.project.entity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ManyToAny;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,13 +19,14 @@ import lombok.NoArgsConstructor;
 @Table(name = "technologiesList")
 @NoArgsConstructor
 @Data
-@NamedQuery(name="findAll", query = "select e from TechnologiesEntity e")
-@NamedQuery(name="findByTechnology", query ="select e from TechnologiesEntity e where e.techName=:by" )
+@NamedQuery(name="findAll", query = "select entity from TechnologiesEntity entity")
+@NamedQuery(name="findTechnology", query ="select entity from TechnologiesEntity entity where entity.techName=:param or entity.language=:param or entity.owner=:param or entity.supportFrom=:param or entity.supportTo=:param or entity.license=:param and entity.id=:id" )
 public class TechnologiesEntity {
     @Id
 	@Column(name = "t_id")
-	private int id;
-	@Column(name = "userId")
+	private int tId;
+  
+	@Column(name = "t_userId")
 	private String userId;
     @Column(name = "t_techName")
 	private String techName;
@@ -42,7 +44,8 @@ public class TechnologiesEntity {
 	private boolean openSource;
     @Column(name = "t_OSType")
 	private String OSType;
-//    @ManyToOne
-//    @JoinColumn(name="userId")
-//    private ProjectEntity projectEntity;
+    
+   @ManyToOne(fetch = FetchType.EAGER, optional=false)
+   @JoinColumn(name="id", referencedColumnName = "id")
+   private ProjectEntity projectEntity;
 }

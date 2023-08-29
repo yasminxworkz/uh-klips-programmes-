@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xworkz.project.dto.TechnologiesDTO;
+import com.xworkz.project.entity.ProjectEntity;
 import com.xworkz.project.entity.TechnologiesEntity;
+import com.xworkz.project.respository.ProjectRepo;
 import com.xworkz.project.respository.TechnologiesRepo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,37 +27,20 @@ public class TechnologiesServiceImp implements TechnologiesService {
 
 	
 	@Autowired
-	TechnologiesRepo repo;
+	TechnologiesRepo technologiesRepo;
+	
+	@Autowired
+	ProjectRepo projectRepo;
 	
 	public TechnologiesServiceImp() {
 		log.info("Running TechnologiesServiceImp......................");
 	}
 	
-	@Override
-	public Set<ConstraintViolation<TechnologiesDTO>> validateAndSave(TechnologiesDTO dto) {
-		Set<ConstraintViolation<TechnologiesDTO>> violations=Validation.buildDefaultValidatorFactory().getValidator().validate(dto);
-		if(violations!=null && !violations.isEmpty()) {
-			System.err.println("violations present ..........invalid data");
-			return violations;
-		}
-		
-		
-		
-
-		
-		log.info("no violations present, dat can be saved");
-		TechnologiesEntity entity=new TechnologiesEntity();
-		BeanUtils.copyProperties(dto, entity);
-		boolean saved=repo.save(entity);
-		log.info("data saved"+ saved);
-		
-		
-		return Collections.emptySet();
-	}
+	
 	
 	@Override
 	public List<TechnologiesDTO> findAll() {
-		List<TechnologiesEntity> entity=this.repo.findAll();
+		List<TechnologiesEntity> entity=this.technologiesRepo.findAll();
 		List<TechnologiesDTO> list= new ArrayList<TechnologiesDTO>();
 		for (TechnologiesEntity technologiesEntity : entity) {
 			TechnologiesDTO dto=new TechnologiesDTO();
@@ -68,33 +53,38 @@ public class TechnologiesServiceImp implements TechnologiesService {
 		return list;
 	}
 
+	
+
 	@Override
-	public List<TechnologiesDTO> findByTechnology(String techName) {
-		log.info("running findByTechnology in Technologyservice........"+techName);
-		if(techName!=null && !techName.isEmpty()) {
-			log.info("techName is valid.............calling repo....");
-			List<TechnologiesEntity> entities=this.repo.findByTechnology(techName);
-			List<TechnologiesDTO> list=new ArrayList<TechnologiesDTO>();
-			for (TechnologiesEntity technologiesEntity : entities) {
-				TechnologiesDTO dto=new TechnologiesDTO();
-				BeanUtils.copyProperties(technologiesEntity, dto);
-				list.add(dto);
-				
-			}
-			
-			log.info("size of dtos "+list.size());
-			log.info("size of entities " +entities.size());
-			return list;
-		}
+	public boolean save(TechnologiesDTO technologiesDTO) {
+		System.out.println("========================================"+technologiesDTO.getUserId());
+
 		
-		else {
-			System.err.println("this name is not available..........................");
-			return Collections.emptyList();
-		}
+		ProjectEntity entity=projectRepo.findByUserId(technologiesDTO.getUserId());
+		
+		TechnologiesEntity technologiesEntity=new TechnologiesEntity();
+		
+		BeanUtils.copyProperties(technologiesDTO, technologiesEntity);
+		
+		technologiesEntity.setProjectEntity(entity);
+		
+		technologiesRepo.save(technologiesEntity);
+		
+		return true;
+	}
+
+
+
+	@Override
+	public List<TechnologiesEntity> findTechnology(String userId, String param) {
+		
+		ProjectEntity entity=projectRepo.findByUserId(userId);
 		
 		
+		int id=entity.getId();
 		
-		
+		List<TechnologiesEntity> list =technologiesRepo.findTechnology(param, id);
+		return list;
 	}
 	
 	

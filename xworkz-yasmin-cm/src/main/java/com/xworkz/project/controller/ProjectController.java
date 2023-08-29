@@ -133,6 +133,7 @@ public class ProjectController {
 			
 			HttpSession session=request.getSession(true);
 			session.setAttribute("userId", dto.getUserId());
+			
 			if (dto.getProfilepic() != null) {
 				session.setAttribute("dtoPic", dto.getProfilepic());
 			}
@@ -154,6 +155,7 @@ public class ProjectController {
 		
 		if(reset==true) {
 			model.addAttribute("resetMsg", "password reset successfull.. click here and signIn with new password generated");
+			
 			return "SignIn";	
 		}
 		

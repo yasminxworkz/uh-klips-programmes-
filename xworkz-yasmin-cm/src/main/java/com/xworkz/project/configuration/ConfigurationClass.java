@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.*;
 @Configuration
 @ComponentScan("com.xworkz.project")
 @Slf4j
-
+@EnableScheduling
 public class ConfigurationClass {
 
 	public ConfigurationClass() {

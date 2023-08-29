@@ -6,17 +6,16 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 import com.xworkz.project.dto.TechnologiesDTO;
+import com.xworkz.project.entity.TechnologiesEntity;
 
 public interface TechnologiesService {
 	
-	Set<ConstraintViolation<TechnologiesDTO>> validateAndSave(TechnologiesDTO dto);
+	boolean save(TechnologiesDTO dto);
 	
 	default List<TechnologiesDTO> findAll(){
 		return null;
 	}
 	
-	default List<TechnologiesDTO> findByTechnology(String techName){
-		return null;
-	}
+	 List<TechnologiesEntity> findTechnology(String userId,String param);
 
 }
